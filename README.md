@@ -1,7 +1,4 @@
 
----
-
-### Here’s a ready-to-use README landing page template for your GitHub project:
 
 ```markdown
 # AI Tech Mastery Hub
@@ -32,7 +29,7 @@ Clone the repository:
 ```bash
 git clone https://github.com/debeatzgh1/AI-Tech-Mastery-Hub-.git
 ```
-Open the resources and guides in the repository or visit the [slides](https://docs.google.com/presentation/d/1F7_mDSijSndGly1Q05YqOZHI1LaSjjt7/edit?usp=drivesdk&utm_source=chatgpt.com).
+Open the resources and guides in the repository or visit the [slides](https://www.socialcreator.com/debeatzgh/?s=317509).
 
 ---
 
