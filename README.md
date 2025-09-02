@@ -10,7 +10,7 @@ Designed for side hustlers, entrepreneurs, and digital creators who want to leve
 
 ## 🚀 Live Demo
 
-[View Project Slides](https://docs.google.com/presentation/d/1F7_mDSijSndGly1Q05YqOZHI1LaSjjt7/edit?usp=drivesdk&utm_source=chatgpt.com)
+[View Project Slides](https://www.socialcreator.com/debeatzgh/?s=317509)
 
 ---
 
