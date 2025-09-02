@@ -41,7 +41,7 @@ Open the resources and guides in the repository or visit the [slides](https://do
 - [Main Blog](http://beatzde4.blogspot.com/)
 - [Community Hub](https://appdategh1.blogspot.com/)
 - [More Projects](https://github.com/debeatzgh1)
-- [Repo Homepage](https://github.com/debeatzgh1/AI-Tech-Mastery-Hub-)
+- [Repo Homepage](https://www.socialcreator.com/debeatzgh/?s=317279)
 
 ---
 
