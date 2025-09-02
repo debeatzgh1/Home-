@@ -12,7 +12,7 @@ This project is built for **side hustlers, entrepreneurs, students, and digital 
 - [📊 AI Tech Mastery Hub – Main Slides](https://www.socialcreator.com/debeatzgh/?s=317509)  
 - [📖 Docs & Resources Hub](https://www.socialcreator.com/debeatzgh/?s=317279)  
 
-🔗 **Preview on Blog:** [Beatzde4](https://www.socialcreator.com/debeatzgh)  
+🔗 **Preview on Blog:** [App](https://debeatzgh1.github.io/Home-/)  
 
 ---
 
