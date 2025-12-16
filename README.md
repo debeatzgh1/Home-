@@ -1,3 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Debeatzgh Digital Hub</title>
+
+<style>
+body{
+  margin:0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont;
+  background:#f3f4f6;
+}
+
+/* ====== CAROUSEL ====== */
+.carousel-wrapper{
+  padding:40px 16px;
+}
+.carousel{
+  display:flex;
+  gap:20px;
+  overflow-x:auto;
+  scroll-snap-type:x mandatory;
+}
+.card{
+  min-width:300px;
+  background:#fff;
+  border-radius:18px;
+  box-shadow:0 10px 30px rgba(0,0,0,.15);
+  scroll-snap-align:center;
+  display:flex;
+  flex-direction:column;
+}
+.card img{
+  height:160px;
+  object-fit:cover;
+  border-radius:18px 18px 0 0;
+}
+.card-content{
+  padding:18px;
+  flex:1;
+}
+.card h3{
+  margin:0 0 8px;
+}
+.card p{
+  font-size:14px;
+  color:#555;
+}
+.card button{
+  margin-top:14px;
+  background:#16a34a;
+  color:#fff;
+  border:none;
+  padding:12px;
+  border-radius:14px;
+  font-weight:700;
+  cursor:pointer;
+}
+.card button:hover{opacity:.9}
+
+/* ===== FLOATING LAUNCHER ===== */
+#floating-launcher{
+  position:fixed;
+  top:20px;
+  left:20px;
+  background:#16a34a;
+  color:#fff;
+  padding:8px 14px;
+  font-size:13px;
+  font-weight:600;
+  border-radius:18px;
+  box-shadow:0 4px 12px rgba(0,0,0,.25);
+  cursor:pointer;
+  z-index:99999;
+}
+
+/* ===== FULLSCREEN OVERLAY ===== */
+#overlay-browser{
+  position:fixed;
+  inset:0;
+  background:#fff;
+  display:none;
+  flex-direction:column;
+  z-index:100000;
+}
+#overlay-topbar{
+  background:#111;
+  color:#fff;
+  padding:12px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+#overlay-title{
+  font-size:14px;
+}
+#overlay-close{
+  cursor:pointer;
+  font-size:20px;
+}
+#overlay-viewer{
+  flex:1;
+  width:100%;
+  border:none;
+}
+</style>
+</head>
+
+<body>
+
+<!-- FLOATING BUTTON -->
+<div id="floating-launcher" onclick="openOverlay('https://debeatzgh1.github.io/debeatzgh/','Debeatzgh Home')">
+  App
+</div>
+
+<!-- CAROUSEL -->
+<div class="carousel-wrapper">
+  <h2 style="text-align:center;">🚀 Debeatzgh Digital Products</h2>
+
+  <div class="carousel">
+
+    <div class="card">
+      <img src="https://debeatzgh.wordpress.com/wp-content/uploads/2025/08/createamoderncleanthumbnaildigitaltool.png">
+      <div class="card-content">
+        <h3>Digital Creator Essential Tools</h3>
+        <p>Professional tools and guides to grow as a modern digital creator.</p>
+        <button onclick="openOverlay('https://debeatzgh1.github.io/Digital-Creator-s-Essential-Guides-Tools/','Creator Tools')">
+          Open App
+        </button>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="https://debeatzgh.wordpress.com/wp-content/uploads/2025/08/createaicleanstarterkitthumbnail.png">
+      <div class="card-content">
+        <h3>Decode AI Starter Kit</h3>
+        <p>Beginner-friendly AI resources to start using artificial intelligence.</p>
+        <button onclick="openOverlay('https://debeatzgh1.github.io/Decode-AI-starter-kit-/','AI Starter Kit')">
+          Launch
+        </button>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="https://debeatzgh.wordpress.com/wp-content/uploads/2025/08/sidehustlethumbnail.png">
+      <div class="card-content">
+        <h3>Side Hustle Starter Kit</h3>
+        <p>Actionable side hustle ideas and tools for online income.</p>
+        <button onclick="openOverlay('https://debeatzgh1.github.io/Side-hustle-starter-kit-/','Side Hustle Kit')">
+          View Kit
+        </button>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="https://debeatzgh.wordpress.com/wp-content/uploads/2025/08/onlinebusinessthumbnail.png">
+      <div class="card-content">
+        <h3>Online Business Kit</h3>
+        <p>Everything you need to start and scale an online business.</p>
+        <button onclick="openOverlay('https://debeatzgh1.github.io/Online-business-kit/','Online Business')">
+          Explore
+        </button>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="https://debeatzgh.wordpress.com/wp-content/uploads/2025/08/affiliateproductsthumbnail.png">
+      <div class="card-content">
+        <h3>Digital Products Affiliate Shop</h3>
+        <p>Curated digital products you can promote and earn from.</p>
+        <button onclick="openOverlay('https://debeatzgh1.github.io/-My-Brand-Online-Digital-Products-Affiliate-Shop/','Affiliate Shop')">
+          Open Shop
+        </button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- FULLSCREEN OVERLAY -->
+<div id="overlay-browser">
+  <div id="overlay-topbar">
+    <span id
+    
+
+
 <style>
   /* 🌟 Fade Slide Animation */
   @keyframes fadeSlideUp {
