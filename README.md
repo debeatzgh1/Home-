@@ -17,7 +17,7 @@ body{
 #floating-launcher{
   position:fixed;
   top:20px;
-  left:20px;
+  right:20px;
   background:#16a34a;
   color:#fff;
   padding:8px 16px;
