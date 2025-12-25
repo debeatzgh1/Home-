@@ -160,7 +160,7 @@ const products = [
     title:"Creator Tools",
     desc:"Professional tools and guides for digital creators.",
     img:"https://debeatzgh.wordpress.com/wp-content/uploads/2025/08/createamoderncleanthumbnaildigitaltool.png",
-    url:"https://debeatzgh1.github.io/Digital-Creator-s-Essential-Guides-Tools/"
+    url:"https://debeatzgh1.github.io/Debeatzgh-Collaborators-Hub/"
   },
   {
     title:"Decode AI Starter Kit",
