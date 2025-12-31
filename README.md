@@ -126,7 +126,7 @@ body{
 <body>
 
 <!-- FLOATING WEB BUTTON -->
-<div id="floating-launcher">Web</div>
+<div id="floating-launcher">menu</div>
 
 <!-- MAIN CONTENT -->
 <section class="carousel-wrapper">
@@ -233,7 +233,7 @@ document.getElementById("overlay-close").onclick=()=>{
 
 /* ===== FLOATING BUTTON ===== */
 document.getElementById("floating-launcher").onclick=()=>{
-  openOverlay("https://debeatzgh1.github.io/debeatzgh/","Welcome to my Links");
+  openOverlay("https://debeatzgh1.github.io/firebase-front-end-components/","Welcome to my Links");
 };
 
 /* ===== SOCIALCREATOR → NEW TAB ===== */
