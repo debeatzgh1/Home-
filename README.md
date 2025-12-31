@@ -130,7 +130,7 @@ body{
 
 <!-- MAIN CONTENT -->
 <section class="carousel-wrapper">
-  <h2>🚀 Debeatzgh Digital Products</h2>
+  <h2>🚀 Digital Products Hub</h2>
 
   <!-- SEARCH -->
   <div class="search-wrapper">
@@ -233,7 +233,7 @@ document.getElementById("overlay-close").onclick=()=>{
 
 /* ===== FLOATING BUTTON ===== */
 document.getElementById("floating-launcher").onclick=()=>{
-  openOverlay("https://msha.ke/debeatzgh","Debeatzgh Links");
+  openOverlay("https://debeatzgh1.github.io/debeatzgh/","Welcome to my Links");
 };
 
 /* ===== SOCIALCREATOR → NEW TAB ===== */
