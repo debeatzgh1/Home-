@@ -251,12 +251,13 @@ frame.addEventListener("load",()=>{
 
 </body>
 </html>
-<!DOCTYPE html>
+
+  <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DeBeatzGH | Professional Digital Solutions</title>
+    <title>DeBeatzGH | Premium Hub</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
@@ -264,212 +265,215 @@ frame.addEventListener("load",()=>{
             --primary: #2563eb;
             --secondary: #0f172a;
             --accent: #38bdf8;
-            --text-light: #f8fafc;
-            --glass: rgba(255, 255, 255, 0.95);
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text: #0f172a;
+            --glass: rgba(255, 255, 255, 0.9);
+            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Inter', sans-serif;
+        [data-theme="dark"] {
+            --bg: #0f172a;
+            --card-bg: #1e293b;
+            --text: #f8fafc;
+            --secondary: #020617;
+            --glass: rgba(15, 23, 42, 0.9);
         }
 
-        body {
-            background-color: #f1f5f9;
-            color: var(--secondary);
-            line-height: 1.6;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        body { background-color: var(--bg); color: var(--text); transition: background var(--transition), color var(--transition); overflow-x: hidden; }
 
-        /* Hero Section */
+        /* --- Top Bar & Clock --- */
+        .top-bar {
+            position: fixed; top: 0; width: 100%; padding: 12px 30px;
+            display: flex; justify-content: space-between; align-items: center;
+            z-index: 100; background: var(--glass); backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(128,128,128,0.2);
+        }
+        .clock-display { font-weight: 700; color: var(--primary); font-family: monospace; }
+
+        /* --- Welcome Popup --- */
+        #welcome-modal {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.8); display: none; z-index: 2000;
+            justify-content: center; align-items: center;
+        }
+        .welcome-content {
+            background: var(--card-bg); padding: 40px; border-radius: 20px;
+            text-align: center; max-width: 450px; position: relative;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+        }
+        .welcome-content h2 { margin-bottom: 15px; color: var(--primary); }
+
+        /* --- Hero Section --- */
         .hero {
             background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.8)), 
                         url('https://debeatzgh.wordpress.com/wp-content/uploads/2026/01/gemini_generated_image_e3b3h0e3b3h0e3b38843226607488610379.png');
-            background-size: cover;
-            background-position: center;
-            height: 80vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            color: white;
-            padding: 20px;
+            background-size: cover; background-position: center;
+            height: 50vh; display: flex; align-items: center; justify-content: center;
+            text-align: center; color: white; padding-top: 50px;
         }
 
-        .hero-content h1 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            letter-spacing: -1px;
+        /* --- Main UI Elements --- */
+        .container { max-width: 1200px; margin: -40px auto 40px; padding: 0 20px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        .card { 
+            background: var(--card-bg); padding: 30px; border-radius: 16px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05); text-align: center;
+            border: 1px solid rgba(128,128,128,0.1); transition: var(--transition);
+        }
+        .card:hover { transform: translateY(-8px); border-color: var(--primary); }
+        
+        .btn-open { 
+            display: inline-block; margin-top: 20px; padding: 12px 25px; 
+            background: var(--primary); color: white; border-radius: 8px; 
+            text-decoration: none; cursor: pointer; font-weight: 600;
         }
 
-        .hero-content p {
-            font-size: 1.2rem;
-            max-width: 700px;
-            margin: 0 auto 2rem;
-            opacity: 0.9;
+        /* --- Iframe Modal --- */
+        #iframe-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.95); display: none; z-index: 1500;
+            justify-content: center; align-items: center;
         }
+        .modal-body { width: 95%; max-width: 1000px; height: 90vh; background: white; border-radius: 15px; overflow: hidden; position: relative; }
+        .close-btn { position: absolute; top: 10px; right: 20px; font-size: 40px; cursor: pointer; color: #000; z-index: 1600; }
+        iframe { width: 100%; height: 100%; border: none; }
 
-        .btn-main {
-            background: var(--primary);
-            color: white;
-            padding: 12px 30px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: 0.3s;
-            display: inline-block;
-        }
+        /* --- Auto Slider --- */
+        .slider-wrap { background: var(--secondary); padding: 40px 0; overflow: hidden; color: white; }
+        .slider-track { display: flex; width: calc(250px * 14); animation: scroll 35s linear infinite; }
+        .mini-card { width: 220px; flex-shrink: 0; margin: 0 15px; padding: 20px; background: rgba(255,255,255,0.05); border-radius: 10px; text-align: center; cursor: pointer; }
 
-        .btn-main:hover {
-            background: var(--accent);
-            transform: translateY(-2px);
-        }
-
-        /* Services Grid */
-        .container {
-            max-width: 1100px;
-            margin: -50px auto 50px;
-            padding: 0 20px;
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-        }
-
-        .card {
-            background: white;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
-            transition: 0.3s;
-            border: 1px solid #e2e8f0;
-        }
-
-        .card:hover {
-            transform: translateY(-10px);
-            border-color: var(--primary);
-        }
-
-        .card i {
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 20px;
-        }
-
-        .card h3 {
-            margin-bottom: 10px;
-            font-size: 1.4rem;
-        }
-
-        .card p {
-            color: #64748b;
-            font-size: 0.95rem;
-            margin-bottom: 20px;
-        }
-
-        .form-link {
-            color: var(--primary);
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        /* Footer */
-        footer {
-            background: var(--secondary);
-            color: white;
-            padding: 40px 20px;
-            text-align: center;
-            margin-top: 50px;
-        }
-
-        .nav-links {
-            margin-bottom: 20px;
-        }
-
-        .nav-links a {
-            color: white;
-            margin: 0 15px;
-            text-decoration: none;
-            font-size: 0.9rem;
-            opacity: 0.7;
-        }
-
-        .nav-links a:hover { opacity: 1; }
-
-        @media (max-width: 768px) {
-            .hero-content h1 { font-size: 2rem; }
-        }
+        @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(calc(-250px * 7)); } }
+        
+        footer { padding: 30px; text-align: center; background: var(--secondary); color: white; }
     </style>
 </head>
 <body>
 
+    <div id="welcome-modal">
+        <div class="welcome-content">
+            <i class="fas fa-rocket" style="font-size: 3rem; color: var(--primary); margin-bottom: 20px;"></i>
+            <h2 id="greeting-text">Welcome!</h2>
+            <p>Explore our premium digital solutions. Use the dashboard below to place orders or manage your projects.</p>
+            <button class="btn-open" onclick="closeWelcome()">Explore Now</button>
+        </div>
+    </div>
+
+    <div class="top-bar">
+        <div class="clock-display" id="liveClock">00:00:00</div>
+        <div style="display: flex; gap: 20px; align-items: center;">
+            <i class="fas fa-moon" id="themeIcon" style="cursor:pointer;" onclick="toggleTheme()"></i>
+        </div>
+    </div>
+
+    <div id="iframe-overlay">
+        <span class="close-btn" onclick="closeFrame()">&times;</span>
+        <div class="modal-body">
+            <iframe id="main-iframe" src=""></iframe>
+        </div>
+    </div>
+
     <section class="hero">
-        <div class="hero-content">
-            <h1>DeBeatzGH Digital Hub</h1>
-            <p>Premium SEO Optimization, Professional Blog Management, and High-End Web Projects Tailored for Your Success.</p>
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSdXCPUz1JBq0W8MHN9VOE0p6cnp5Wtr74Ox2gqLLyzKi0UwKA/viewform?usp=header" class="btn-main">Sign In to Dashboard</a>
+        <div style="padding: 20px;">
+            <h1 style="font-size: 3.2rem;">DeBeatzGH Digital</h1>
+            <p style="opacity: 0.9; font-size: 1.2rem;">Professionalism. Efficiency. Results.</p>
         </div>
     </section>
 
     <div class="container">
         <div class="grid">
             <div class="card">
-                <i class="fas fa-search-dollar"></i>
-                <h3>SEO Optimization</h3>
-                <p>Boost your search rankings and visibility with our professional SEO order processing.</p>
-                <a href="https://docs.google.com/forms/d/e/1FAIpQLSfS_zQJx3CksS-zfLU6sNgXlqI3tq7nmpKeW7_8iWUYpCJpDQ/viewform?usp=header" class="form-link">Place SEO Order &rarr;</a>
+                <i class="fas fa-id-card"></i>
+                <h3>Client Portal</h3>
+                <p>Sign in to track your orders.</p>
+                <div class="btn-open" onclick="openFrame('https://docs.google.com/forms/d/e/1FAIpQLSdXCPUz1JBq0W8MHN9VOE0p6cnp5Wtr74Ox2gqLLyzKi0UwKA/viewform')">Login</div>
             </div>
-
             <div class="card">
-                <i class="fas fa-pen-nib"></i>
-                <h3>Blog Management</h3>
-                <p>Quality content creation and blog structuring services for your brand's voice.</p>
-                <a href="https://docs.google.com/forms/d/e/1FAIpQLSd2fIJuPsH_fybU1esTlCaeci2s-ERDLt2L7lAp3kW4QL6D7w/viewform?usp=header" class="form-link">Order Blog Post &rarr;</a>
+                <i class="fas fa-rocket"></i>
+                <h3>SEO Optimization</h3>
+                <p>Get found on the first page.</p>
+                <div class="btn-open" onclick="openFrame('https://docs.google.com/forms/d/e/1FAIpQLSfS_zQJx3CksS-zfLU6sNgXlqI3tq7nmpKeW7_8iWUYpCJpDQ/viewform')">Order SEO</div>
             </div>
-
             <div class="card">
                 <i class="fas fa-laptop-code"></i>
-                <h3>Project Development</h3>
-                <p>Custom web projects and digital solutions built with modern frameworks.</p>
-                <a href="https://docs.google.com/forms/d/e/1FAIpQLSdipVP7tU1hjTjECfWUdnhzWN-PROdQp19ng25EUDJk5-8JzA/viewform?usp=header" class="form-link">Start a Project &rarr;</a>
-            </div>
-
-            <div class="card">
-                <i class="fas fa-file-invoice"></i>
-                <h3>Content Formatting</h3>
-                <p>Transform your raw data into professional, readable, and SEO-friendly formats.</p>
-                <a href="https://docs.google.com/forms/d/e/1FAIpQLSd5sIJkuaBveQLFp4-W2WLvU33oDbAZMwy61MLwpMZuXrEk7Q/viewform?usp=header" class="form-link">Format Content &rarr;</a>
-            </div>
-
-            <div class="card">
-                <i class="fas fa-lightbulb"></i>
-                <h3>Suggestions</h3>
-                <p>Have an idea to improve our services? We value your professional feedback.</p>
-                <a href="https://docs.google.com/forms/d/e/1FAIpQLSdx2yQU28hg4L4Rm8rSdvjR4FZPpbys7XKEZDFul5yubv3Olg/viewform?usp=header" class="form-link">Submit Idea &rarr;</a>
-            </div>
-
-            <div class="card">
-                <i class="fas fa-headset"></i>
-                <h3>Support Desk</h3>
-                <p>Need direct assistance? Contact our team for professional support and inquiries.</p>
-                <a href="https://docs.google.com/forms/d/e/1FAIpQLSfBDlR6TcU9sWjbeVOp6dtb4GMKdL6SP_i0KB08IrtbLT9wwA/viewform?usp=header" class="form-link">Contact Us &rarr;</a>
+                <h3>Web Projects</h3>
+                <p>Custom websites built for you.</p>
+                <div class="btn-open" onclick="openFrame('https://docs.google.com/forms/d/e/1FAIpQLSdipVP7tU1hjTjECfWUdnhzWN-PROdQp19ng25EUDJk5-8JzA/viewform')">Start Now</div>
             </div>
         </div>
     </div>
 
+    <div class="slider-wrap">
+        <p style="text-align:center; opacity:0.5; font-size:0.8rem; margin-bottom:20px;">QUICK ACCESS SERVICES</p>
+        <div class="slider-track">
+            <div class="mini-card" onclick="openFrame('https://docs.google.com/forms/d/e/1FAIpQLSfBDlR6TcU9sWjbeVOp6dtb4GMKdL6SP_i0KB08IrtbLT9wwA/viewform')"><i class="fas fa-phone"></i><br>Contact</div>
+            <div class="mini-card" onclick="openFrame('https://docs.google.com/forms/d/e/1FAIpQLSdx2yQU28hg4L4Rm8rSdvjR4FZPpbys7XKEZDFul5yubv3Olg/viewform')"><i class="fas fa-comment"></i><br>Suggestions</div>
+            <div class="mini-card" onclick="openFrame('https://docs.google.com/forms/d/e/1FAIpQLSd5sIJkuaBveQLFp4-W2WLvU33oDbAZMwy61MLwpMZuXrEk7Q/viewform')"><i class="fas fa-columns"></i><br>Formatting</div>
+            <div class="mini-card" onclick="openFrame('https://docs.google.com/forms/d/e/1FAIpQLSd2fIJuPsH_fybU1esTlCaeci2s-ERDLt2L7lAp3kW4QL6D7w/viewform')"><i class="fas fa-edit"></i><br>Blogging</div>
+            <div class="mini-card" onclick="window.location.href='https://debeatzgh1.github.io/1/'"><i class="fas fa-link"></i><br>Main Site</div>
+            <div class="mini-card" onclick="openFrame('https://docs.google.com/forms/d/e/1FAIpQLSfBDlR6TcU9sWjbeVOp6dtb4GMKdL6SP_i0KB08IrtbLT9wwA/viewform')"><i class="fas fa-phone"></i><br>Contact</div>
+            <div class="mini-card" onclick="openFrame('https://docs.google.com/forms/d/e/1FAIpQLSdx2yQU28hg4L4Rm8rSdvjR4FZPpbys7XKEZDFul5yubv3Olg/viewform')"><i class="fas fa-comment"></i><br>Suggestions</div>
+            </div>
+    </div>
+
     <footer>
-        <div class="nav-links">
-            <a href="https://debeatzgh1.github.io/1/">Official Website</a>
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSdXCPUz1JBq0W8MHN9VOE0p6cnp5Wtr74Ox2gqLLyzKi0UwKA/viewform?usp=header">Client Portal</a>
-        </div>
-        <p>&copy; 2026 DeBeatzGH Digital. All rights reserved.</p>
+        <p>&copy; 2026 DeBeatzGH | Digital Solutions Provider</p>
     </footer>
 
+    <script>
+        // Welcome Logic
+        window.onload = function() {
+            if (!localStorage.getItem('visited')) {
+                document.getElementById('welcome-modal').style.display = 'flex';
+                setGreeting();
+            }
+        };
+
+        function setGreeting() {
+            const hour = new Date().getHours();
+            let g = "Welcome to DeBeatzGH!";
+            if (hour < 12) g = "Good Morning!";
+            else if (hour < 18) g = "Good Afternoon!";
+            else g = "Good Evening!";
+            document.getElementById('greeting-text').innerText = g;
+        }
+
+        function closeWelcome() {
+            document.getElementById('welcome-modal').style.display = 'none';
+            localStorage.setItem('visited', 'true');
+        }
+
+        // Clock
+        setInterval(() => {
+            document.getElementById('liveClock').innerText = new Date().toLocaleTimeString();
+        }, 1000);
+
+        // Theme
+        function toggleTheme() {
+            const b = document.body;
+            const icon = document.getElementById('themeIcon');
+            if (b.getAttribute('data-theme') === 'dark') {
+                b.setAttribute('data-theme', 'light');
+                icon.className = 'fas fa-moon';
+            } else {
+                b.setAttribute('data-theme', 'dark');
+                icon.className = 'fas fa-sun';
+            }
+        }
+
+        // Iframe
+        function openFrame(u) {
+            document.getElementById('main-iframe').src = u;
+            document.getElementById('iframe-overlay').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+        function closeFrame() {
+            document.getElementById('iframe-overlay').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+    </script>
 </body>
 </html>
 
