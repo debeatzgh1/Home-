@@ -110,7 +110,7 @@
     }
     .preview-header{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:10px}
     .preview-iframe{flex:1;border-radius:8px;border:1px solid rgba(255,255,255,0.04);overflow:hidden}
-    iframe{width:100%;height:100%;border:0}
+    iframe{width:140%;height:140%;border:0}
 
     .analytics{font-size:12px;color:var(--muted);margin-top:8px;display:flex;gap:12px;align-items:center}
     .summary{background:var(--glass-2);padding:10px;border-radius:10px;font-size:13px;color:var(--muted);max-height:160px;overflow:auto}
