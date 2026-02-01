@@ -1,499 +1,254 @@
-
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Multi-Tab Launcher — debeatzgh1</title>
-  <meta name="description" content="Launcher for my GitHub Pages projects with iframe preview, auto carousel, AI summary, and tracking." />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debeatzgh Hub | Modern Launcher</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+        
+        body { font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
 
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+        .pulse-animation {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
 
-  <style>
-    :root{
-      --bg:#0f172a;
-      --card:#0b1220;
-      --muted:#94a3b8;
-      --accent:#7c3aed;
-      --glass: rgba(255,255,255,0.03);
-      --glass-2: rgba(255,255,255,0.02);
-    }
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;
-      font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;
-      background:linear-gradient(180deg,#071024 0%, #07122a 60%);
-      color:#e6eef8;
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
-      padding:28px;
-    }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: .7; transform: scale(1.05); }
+        }
 
-    .container{max-width:1200px;margin:0 auto}
+        .glass {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
 
-    header{display:flex;align-items:center;gap:16px;margin-bottom:18px}
-    .brand{
-      display:flex;flex-direction:column;
-      gap:4px;
-    }
-    .title{font-weight:800;font-size:20px;letter-spacing:-0.4px}
-    .subtitle{font-size:13px;color:var(--muted)}
+        .iframe-container {
+            height: 70vh;
+            width: 100%;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
 
-    /* Tabs */
-    .tabs{display:flex;gap:8px;margin:12px 0 20px}
-    .tab{
-      background:var(--glass);
-      padding:8px 12px;border-radius:10px;border:1px solid rgba(255,255,255,0.03);
-      cursor:pointer;color:var(--muted);font-weight:600;font-size:13px;
-    }
-    .tab.active{background:linear-gradient(90deg,#2b076e,#5b21b6);color:white;box-shadow:0 6px 16px rgba(92,33,182,0.18);transform:translateY(-2px)}
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: #1a1a1a; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #3b82f6; border-radius: 10px; }
+    </style>
 
-    /* layout */
-    .grid{display:grid;grid-template-columns: 1fr 360px; gap:18px; align-items:start}
-    .left{min-height:60vh}
-    .right{position:relative}
-
-    /* Carousel */
-    .carousel{background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent); padding:14px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);margin-bottom:16px}
-    .carousel-viewport{position:relative;overflow:hidden;border-radius:10px}
-    .carousel-track{display:flex;transition:transform 650ms cubic-bezier(.2,.9,.2,1)}
-    .carousel-item{
-      min-width:100%;display:flex;gap:12px;padding:18px;align-items:center;
-    }
-    .carousel-thumb{width:160px;height:90px;border-radius:8px;flex-shrink:0;overflow:hidden;background:#031029;display:flex;align-items:center;justify-content:center;color:var(--muted);font-weight:700}
-    .carousel-meta{flex:1}
-    .carousel-meta h3{margin:0 0 6px;font-size:18px}
-    .carousel-meta p{margin:0;color:var(--muted);font-size:13px}
-
-    .carousel-controls{display:flex;justify-content:space-between;margin-top:10px;align-items:center}
-    .dots{display:flex;gap:6px}
-    .dot{width:10px;height:10px;border-radius:10px;background:rgba(255,255,255,0.06);cursor:pointer}
-    .dot.active{background:var(--accent);box-shadow:0 6px 12px rgba(124,58,237,0.12)}
-
-    /* cards */
-    .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}
-    .card{
-      background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
-      border-radius:12px;padding:12px;border:1px solid rgba(255,255,255,0.03);
-      display:flex;flex-direction:column;gap:10px;
-    }
-    .thumb{
-      height:120px;border-radius:8px;background:#031029;display:flex;align-items:center;justify-content:center;color:var(--muted);
-      overflow:hidden;position:relative;
-    }
-    .thumb img{width:100%;height:100%;object-fit:cover;display:block}
-    .meta h4{margin:0;font-size:15px}
-    .meta p{margin:0;color:var(--muted);font-size:13px}
-
-    .actions{display:flex;gap:8px}
-    .btn{
-      padding:8px 10px;border-radius:10px;background:var(--glass);border:1px solid rgba(255,255,255,0.03);cursor:pointer;color:#fff;font-weight:600;font-size:13px;
-    }
-    .btn.ghost{background:transparent;border:1px dashed rgba(255,255,255,0.04);color:var(--muted)}
-    .btn.primary{background:linear-gradient(90deg,#7c3aed,#5b21b6);box-shadow:0 8px 24px rgba(92,33,182,0.14)}
-
-    .pulse{
-      animation: pulse 1.6s infinite;
-    }
-    @keyframes pulse {
-      0%{ box-shadow: 0 0 0 0 rgba(124,58,237,0.15); }
-      70%{ box-shadow: 0 0 0 12px rgba(124,58,237,0); }
-      100%{ box-shadow: 0 0 0 0 rgba(124,58,237,0); }
-    }
-
-    /* iframe preview */
-    .preview{
-      background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
-      border-radius:12px;padding:12px;border:1px solid rgba(255,255,255,0.03);
-      height:60vh;display:flex;flex-direction:column;
-    }
-    .preview-header{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:10px}
-    .preview-iframe{flex:1;border-radius:8px;border:1px solid rgba(255,255,255,0.04);overflow:hidden}
-    iframe{width:140%;height:140%;border:0}
-
-    .analytics{font-size:12px;color:var(--muted);margin-top:8px;display:flex;gap:12px;align-items:center}
-    .summary{background:var(--glass-2);padding:10px;border-radius:10px;font-size:13px;color:var(--muted);max-height:160px;overflow:auto}
-
-    /* responsive */
-    @media (max-width:960px){
-      .grid{grid-template-columns:1fr;gap:12px}
-      .right{order:-1}
-    }
-  </style>
-
-  <!-- Google Analytics (change MEASUREMENT_ID) -->
-  <!-- Replace G-XXXXXXX with your Measurement ID or remove if not using GA -->
-  <script>
-    window.GA_MEASUREMENT_ID = "G-REPLACE_WITH_YOURS"; // <-- set your GA id here
-    (function(){
-      if(!window.GA_MEASUREMENT_ID || window.GA_MEASUREMENT_ID.includes("REPLACE")) return;
-      // gtag
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-XXXXX-Y"></script>
+    <script>
       window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments)}
+      function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-      gtag('config', window.GA_MEASUREMENT_ID);
-      var s = document.createElement('script');
-      s.async = true;
-      s.src = "https://www.googletagmanager.com/gtag/js?id=" + window.GA_MEASUREMENT_ID;
-      document.head.appendChild(s);
-      window.gtag = gtag;
-    })();
-  </script>
-
+      gtag('config', 'UA-XXXXX-Y');
+    </script>
 </head>
-<body>
-  <div class="container">
-    <header>
-      <div style="width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,#7c3aed,#06b6d4);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:20px">
-        D
-      </div>
-      <div class="brand">
-        <div class="title">DebeatzGH Multi-Tab Launcher</div>
-        <div class="subtitle">Quick access, previews, summaries, and tracking — built for GitHub Pages</div>
-      </div>
+<body class="bg-[#0f172a] text-slate-200 custom-scrollbar">
+
+    <nav class="fixed top-0 w-full z-50 glass px-6 py-4 flex justify-between items-center">
+        <div class="flex items-center gap-2">
+            <div class="w-8 h-8 bg-blue-600 rounded-lg pulse-animation"></div>
+            <h1 class="text-xl font-bold tracking-tight">DEBEATZGH <span class="text-blue-500 text-sm">HUB</span></h1>
+        </div>
+        <div class="flex gap-4">
+            <button onclick="scrollToSection('explorer')" class="hover:text-blue-400 transition">Explorer</button>
+            <button onclick="scrollToSection('viewer')" class="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-full text-sm font-semibold transition">Live View</button>
+        </div>
+    </nav>
+
+    <header class="pt-24 pb-12 px-6">
+        <div class="max-w-6xl mx-auto relative overflow-hidden rounded-3xl h-64 md:h-96 group">
+            <div id="carousel" class="flex transition-transform duration-700 ease-in-out h-full">
+                </div>
+            <div class="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2" id="carousel-dots"></div>
+        </div>
     </header>
 
-    <div class="tabs" role="tablist" aria-label="Filters">
-      <button class="tab active" data-filter="all">All</button>
-      <button class="tab" data-filter="iframe">Iframe Preview</button>
-      <button class="tab" data-filter="newtab">Open New Tab</button>
-      <button class="tab" data-filter="featured">Featured (Carousel)</button>
-    </div>
-
-    <div class="grid">
-      <div class="left">
-        <!-- Carousel -->
-        <div class="carousel">
-          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
-            <div style="font-weight:700">Featured</div>
-            <div style="font-size:13px;color:var(--muted)">Auto-slide showcase</div>
-          </div>
-          <div class="carousel-viewport" id="carouselViewport">
-            <div class="carousel-track" id="carouselTrack"></div>
-          </div>
-          <div class="carousel-controls">
-            <div class="dots" id="carouselDots"></div>
-            <div style="display:flex;gap:8px">
-              <button class="btn ghost" id="prevSlide">Prev</button>
-              <button class="btn ghost" id="nextSlide">Next</button>
+    <section class="px-6 py-8">
+        <div class="max-w-6xl mx-auto glass rounded-2xl p-6 border-l-4 border-blue-500">
+            <div class="flex items-center gap-2 mb-3">
+                <i data-lucide="sparkles" class="text-blue-400 w-5 h-5"></i>
+                <h3 class="text-lg font-semibold">AI Ecosystem Summary</h3>
             </div>
-          </div>
+            <p id="ai-summary" class="text-slate-400 leading-relaxed italic">
+                Scanning project metadata... initializing intelligent overview...
+            </p>
         </div>
+    </section>
 
-        <!-- Cards -->
-        <div class="cards" id="cardsGrid" aria-live="polite"></div>
-      </div>
-
-      <aside class="right">
-        <div class="preview" aria-label="Preview area">
-          <div class="preview-header">
-            <div style="display:flex;gap:8px;align-items:center">
-              <div style="font-weight:700">Iframe Preview</div>
-              <div style="font-size:12px;color:var(--muted)">Load a site into the embedded frame</div>
+    <section id="explorer" class="px-6 py-12">
+        <div class="max-w-6xl mx-auto">
+            <div class="flex justify-between items-end mb-8">
+                <div>
+                    <h2 class="text-3xl font-bold">Project Library</h2>
+                    <p class="text-slate-500">Select a tool to launch or preview</p>
+                </div>
+                <div class="flex gap-2">
+                    <span class="px-3 py-1 bg-slate-800 rounded-md text-xs border border-slate-700">18 Total Links</span>
+                </div>
             </div>
-            <div style="display:flex;gap:8px">
-              <button class="btn ghost" id="reloadFrame">Reload</button>
-              <button class="btn primary" id="openNewTabPreview">Open in New Tab</button>
-            </div>
-          </div>
-          <div class="preview-iframe" id="previewFrameWrap">
-            <iframe id="previewFrame" src=""></iframe>
-          </div>
 
-          <div style="display:flex;gap:8px;margin-top:12px">
-            <input id="searchInput" placeholder="Filter by title..." style="flex:1;padding:10px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit" />
-            <button class="btn" id="clearSearch">Clear</button>
-          </div>
-
-          <div class="analytics" style="margin-top:10px">
-            <div id="clickCount">Clicks: 0</div>
-            <div id="lastAction" style="color:var(--muted)">No actions yet</div>
-          </div>
-
-          <div style="margin-top:12px">
-            <div style="font-weight:700;margin-bottom:8px">AI Summary</div>
-            <div style="display:flex;gap:8px;margin-bottom:8px">
-              <button class="btn" id="summarizeBtn">Summarize current preview</button>
-              <button class="btn ghost" id="openAIConfig">Use OpenAI (serverless)</button>
-            </div>
-            <div class="summary" id="summaryBox">No summary yet. Click "Summarize current preview" — uses a public CORS proxy to fetch page HTML and returns the first 2–3 sentences as a quick summary (works best on text-based pages).</div>
-          </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="project-grid">
+                </div>
         </div>
-      </aside>
-    </div>
-  </div>
+    </section>
 
-<script>
-/*
-  CONFIG
-  - Edit the "sites" array below to add/remove pages.
-  - Update GA_MEASUREMENT_ID at top of file.
-  - For better AI summaries (OpenAI) add a serverless function and set OPENAI_ENDPOINT below and it will POST { url } to your server to summarize.
-*/
-const OPENAI_ENDPOINT = ""; // Optional: set to your serverless summary endpoint (POST { url })
-const sites = [
-  { title: "Home 1", url: "https://debeatzgh1.github.io/1/", desc:"Landing demo and index.", thumb: "https://via.placeholder.com/320x180.png?text=Home+1", tags:["iframe","newtab"], featured:true },
-  { title: "AI Chat", url: "https://debeatzgh1.github.io/ai-chat/", desc:"An AI chat demo.", thumb: "https://via.placeholder.com/320x180.png?text=AI+Chat", tags:["iframe","newtab"], featured:true },
-  { title: "Posts", url: "https://debeatzgh1.github.io/posts/", desc:"Blog posts and updates.", thumb: "https://via.placeholder.com/320x180.png?text=Posts", tags:["iframe","newtab"] },
-  { title: "Personal Portfolio", url: "https://debeatzgh1.github.io/Personal-Portfolio-site-/", desc:"Portfolio site.", thumb: "https://via.placeholder.com/320x180.png?text=Portfolio", tags:["iframe","newtab"] },
-  { title: "Collaborators Hub", url: "https://debeatzgh1.github.io/Debeatzgh-Collaborators-Hub/", desc:"Collaborator portal.", thumb: "https://via.placeholder.com/320x180.png?text=Hub", tags:["iframe","newtab"] },
-  { title: "Decode AI Starter", url: "https://debeatzgh1.github.io/Decode-AI-starter-kit-/", desc:"Starter kit for AI projects.", thumb: "https://via.placeholder.com/320x180.png?text=Decode+AI", tags:["iframe","newtab"] },
-  { title: "Guide to Side Hustle", url: "https://debeatzgh1.github.io/The-Ultimate-Guide-to-Side-Hustle/", desc:"Guides and resources.", thumb: "https://via.placeholder.com/320x180.png?text=Side+Hustle", tags:["iframe","newtab"] },
-  { title: "Firebase UI", url: "https://debeatzgh1.github.io/firebase-front-end-components/", desc:"Reusable components.", thumb: "https://via.placeholder.com/320x180.png?text=Firebase+UI", tags:["iframe","newtab"] },
-  { title: "Sales", url: "https://debeatzgh1.github.io/sales/", desc:"Sales pages.", thumb: "https://via.placeholder.com/320x180.png?text=Sales", tags:["iframe","newtab"] },
-  { title: "Me", url: "https://debeatzgh1.github.io/me-/", desc:"About me page.", thumb: "https://via.placeholder.com/320x180.png?text=Me", tags:["iframe","newtab"] },
-  { title: "DebeatzGH", url: "https://debeatzgh1.github.io/debeatzgh/", desc:"Project hub.", thumb: "https://via.placeholder.com/320x180.png?text=DebeatzGH", tags:["iframe","newtab"] },
-  { title: "Side Hustle Kit", url: "https://debeatzgh1.github.io/Side-hustle-starter-kit-/", desc:"Starter kit.", thumb: "https://via.placeholder.com/320x180.png?text=Starter+Kit", tags:["iframe","newtab"] },
-  { title: "Online Business Kit", url: "https://debeatzgh1.github.io/Online-business-kit/", desc:"Business resources.", thumb: "https://via.placeholder.com/320x180.png?text=Business+Kit", tags:["iframe","newtab"] },
-  { title: "Tailwind Homepage", url: "https://debeatzgh1.github.io/Modern-homepage-styling-with-TailwindCSS-/", desc:"Styling guide.", thumb: "https://via.placeholder.com/320x180.png?text=Tailwind+Guide", tags:["iframe","newtab"] },
-  { title: "Menu Widget", url: "https://debeatzgh1.github.io/menu-widget-/", desc:"UI widget.", thumb: "https://via.placeholder.com/320x180.png?text=Menu+Widget", tags:["iframe","newtab"] },
-  { title: "MB Online", url: "https://debeatzgh1.github.io/MB--online-/", desc:"Marketplace demo.", thumb: "https://via.placeholder.com/320x180.png?text=MB+Online", tags:["iframe","newtab"] },
-  { title: "Popup Generator", url: "https://debeatzgh1.github.io/popup-html-page-generator-blogger/", desc:"Popup generator tool.", thumb: "https://via.placeholder.com/320x180.png?text=Popup+Gen", tags:["iframe","newtab"] },
-  { title: "Floating Dock", url: "https://debeatzgh1.github.io/-Floating-Dock-Smart-Iframe-Modal/#", desc:"Floating dock demo.", thumb: "https://via.placeholder.com/320x180.png?text=Floating+Dock", tags:["iframe","newtab"] }
-];
-
-// Simple local tracking
-let clickCounter = Number(localStorage.getItem('launcher_clicks')||0);
-const updateTrackingUI = (action) => {
-  clickCounter++;
-  localStorage.setItem('launcher_clicks', clickCounter);
-  document.getElementById('clickCount').innerText = 'Clicks: ' + clickCounter;
-  document.getElementById('lastAction').innerText = action + ' • ' + (new Date()).toLocaleTimeString();
-  // send to gtag if configured
-  if(window.gtag) {
-    window.gtag('event','launcher_interaction',{event_category:'launcher',event_label:action});
-  }
-};
-
-// Build UI
-const cardsGrid = document.getElementById('cardsGrid');
-const previewFrame = document.getElementById('previewFrame');
-const previewFrameWrap = document.getElementById('previewFrameWrap');
-const openNewTabPreviewBtn = document.getElementById('openNewTabPreview');
-const reloadFrameBtn = document.getElementById('reloadFrame');
-const summaryBox = document.getElementById('summaryBox');
-
-function createCard(site){
-  const el = document.createElement('div');
-  el.className = 'card';
-  el.innerHTML = `
-    <div class="thumb">
-      <img loading="lazy" src="${site.thumb}" alt="${site.title} thumbnail" />
-    </div>
-    <div class="meta">
-      <h4>${site.title}</h4>
-      <p>${site.desc}</p>
-    </div>
-    <div style="display:flex;justify-content:space-between;align-items:center">
-      <div class="actions">
-        <button class="btn primary" data-action="iframe" title="Open in iframe">Preview</button>
-        <button class="btn ghost" data-action="newtab" title="Open in new tab">Open</button>
-        <button class="btn" data-action="summary" title="AI summary">Summary</button>
-      </div>
-    </div>
-  `;
-  // wiring actions
-  el.querySelector('[data-action="iframe"]').addEventListener('click', () => {
-    loadPreview(site.url);
-    updateTrackingUI('Preview: ' + site.title);
-    // set pulse animation temporarily
-    el.querySelector('.thumb').classList.add('pulse');
-    setTimeout(()=>el.querySelector('.thumb').classList.remove('pulse'), 1600);
-  });
-  el.querySelector('[data-action="newtab"]').addEventListener('click', () => {
-    window.open(site.url, '_blank', 'noopener');
-    updateTrackingUI('Open New Tab: ' + site.title);
-  });
-  el.querySelector('[data-action="summary"]').addEventListener('click', () => {
-    summarizeUrl(site.url);
-    updateTrackingUI('Summary requested: ' + site.title);
-  });
-
-  return el;
-}
-
-function renderCards(filter='all', query=''){
-  cardsGrid.innerHTML = '';
-  const list = sites.filter(s => {
-    if(filter === 'iframe') return s.tags.includes('iframe');
-    if(filter === 'newtab') return s.tags.includes('newtab');
-    if(filter === 'featured') return s.featured;
-    return true;
-  }).filter(s => s.title.toLowerCase().includes(query.toLowerCase()));
-  if(list.length === 0){
-    cardsGrid.innerHTML = '<div style="color:var(--muted)">No results</div>';
-    return;
-  }
-  for(const s of list){
-    cardsGrid.appendChild(createCard(s));
-  }
-}
-
-// preview iframe
-let currentPreview = null;
-function loadPreview(url){
-  // Use srcdoc trick for internal or same origin? We'll just set src
-  previewFrame.src = url;
-  currentPreview = url;
-  updatePreviewButtons();
-}
-
-function updatePreviewButtons(){
-  openNewTabPreviewBtn.onclick = ()=>{ if(currentPreview) window.open(currentPreview,'_blank','noopener'); updateTrackingUI('Open new tab from preview: '+currentPreview); }
-  reloadFrameBtn.onclick = ()=>{ if(currentPreview) { previewFrame.src = currentPreview; updateTrackingUI('Reload preview: '+currentPreview); } };
-}
-
-document.getElementById('searchInput').addEventListener('input', (e)=> {
-  renderCards(document.querySelector('.tab.active').dataset.filter || 'all', e.target.value);
-});
-document.getElementById('clearSearch').addEventListener('click', ()=>{ document.getElementById('searchInput').value=''; renderCards(document.querySelector('.tab.active').dataset.filter || 'all', ''); });
-
-// Tabs
-document.querySelectorAll('.tab').forEach(t => {
-  t.addEventListener('click', ()=> {
-    document.querySelectorAll('.tab').forEach(tt => tt.classList.remove('active'));
-    t.classList.add('active');
-    const filter = t.dataset.filter;
-    renderCards(filter, document.getElementById('searchInput').value);
-    // For featured switch, also jump to carousel
-    if(filter === 'featured') {
-      // show only featured in cards as well
-      renderCards('featured', document.getElementById('searchInput').value);
-    }
-  });
-});
-
-// Carousel Implementation
-const carouselTrack = document.getElementById('carouselTrack');
-const carouselDots = document.getElementById('carouselDots');
-const featured = sites.filter(s=>s.featured);
-let slideIndex = 0;
-function buildCarousel(){
-  carouselTrack.innerHTML = '';
-  carouselDots.innerHTML = '';
-  if(featured.length === 0){
-    carouselTrack.innerHTML = `<div class="carousel-item"><div style="padding:18px">No featured items</div></div>`;
-    return;
-  }
-  featured.forEach((s, i) => {
-    const item = document.createElement('div');
-    item.className = 'carousel-item';
-    item.innerHTML = `
-      <div class="carousel-thumb">
-        <img src="${s.thumb}" alt="${s.title}" style="width:100%;height:100%;object-fit:cover"/>
-      </div>
-      <div class="carousel-meta">
-        <h3>${s.title}</h3>
-        <p>${s.desc}</p>
-        <div style="margin-top:10px;display:flex;gap:8px">
-          <button class="btn primary" data-url="${s.url}">Preview</button>
-          <button class="btn ghost" data-url="${s.url}">Open</button>
+    <section id="viewer" class="px-6 py-20 bg-slate-900/50">
+        <div class="max-w-6xl mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-center mb-6 gap-4">
+                <div class="flex items-center gap-4">
+                    <div class="p-3 bg-blue-600/20 rounded-xl">
+                        <i data-lucide="monitor" class="text-blue-500"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-2xl font-bold" id="view-title">Smart Preview</h2>
+                        <p class="text-slate-500 text-sm" id="view-url">Select a project above to load iframe</p>
+                    </div>
+                </div>
+                <button id="external-link" class="flex items-center gap-2 bg-slate-800 hover:bg-slate-700 px-6 py-3 rounded-xl transition">
+                    <span>Open in New Tab</span>
+                    <i data-lucide="external-link" class="w-4 h-4"></i>
+                </button>
+            </div>
+            
+            <div class="iframe-container bg-slate-800 border border-slate-700 flex items-center justify-center relative">
+                <div id="iframe-loader" class="hidden absolute inset-0 flex items-center justify-center bg-slate-900 z-10">
+                    <div class="w-12 h-12 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+                </div>
+                <iframe id="main-iframe" src="" frameborder="0" class="w-full h-full"></iframe>
+                <div id="iframe-placeholder" class="text-center">
+                    <i data-lucide="mouse-pointer-click" class="w-12 h-12 mx-auto mb-4 text-slate-600"></i>
+                    <p class="text-slate-500">Click "Launch Preview" on any card to load it here</p>
+                </div>
+            </div>
         </div>
-      </div>
-    `;
-    carouselTrack.appendChild(item);
-    const dot = document.createElement('div');
-    dot.className = 'dot' + (i===0? ' active':'');
-    dot.addEventListener('click', ()=>{ goToSlide(i); pauseAutoSlide(); });
-    carouselDots.appendChild(dot);
-    // action buttons
-    item.querySelectorAll('button').forEach(btn => {
-      btn.addEventListener('click',(ev)=>{
-        const u = ev.currentTarget.dataset.url;
-        if(ev.currentTarget.classList.contains('primary')){
-          loadPreview(u);
-          updateTrackingUI('Carousel preview: '+u);
-        } else {
-          window.open(u,'_blank','noopener');
-          updateTrackingUI('Carousel open: '+u);
+    </section>
+
+    <footer class="py-12 text-center text-slate-600 text-sm border-t border-slate-800">
+        <p>&copy; 2024 Debeatzgh Development Hub. Built for performance.</p>
+    </footer>
+
+    <script>
+        const projects = [
+            { title: "AI Chat Interface", url: "https://debeatzgh1.github.io/ai-chat/", category: "AI Tools", content: "Advanced conversational interface using modern AI models.", thumb: "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=800&q=80" },
+            { title: "Personal Portfolio", url: "https://debeatzgh1.github.io/Personal-Portfolio-site-/", category: "Web Design", content: "Professional showcase of creative works and technical skills.", thumb: "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=800&q=80" },
+            { title: "Collaborators Hub", url: "https://debeatzgh1.github.io/Debeatzgh-Collaborators-Hub/", category: "Community", content: "Platform for developers to connect and build together.", thumb: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80" },
+            { title: "Decode AI Starter Kit", url: "https://debeatzgh1.github.io/Decode-AI-starter-kit-/", category: "Education", content: "Comprehensive resources for beginning your AI journey.", thumb: "https://images.unsplash.com/photo-1620712943543-bcc4628c975c?auto=format&fit=crop&w=800&q=80" },
+            { title: "Side Hustle Guide", url: "https://debeatzgh1.github.io/The-Ultimate-Guide-to-Side-Hustle/", category: "Business", content: "Unlock new revenue streams with these proven strategies.", thumb: "https://images.unsplash.com/photo-1553729459-efe14ef6055d?auto=format&fit=crop&w=800&q=80" },
+            { title: "Firebase UI Components", url: "https://debeatzgh1.github.io/firebase-front-end-components/", category: "Development", content: "Plug-and-play UI elements for Firebase backends.", thumb: "https://images.unsplash.com/photo-1614741118887-7a4ee193a5fa?auto=format&fit=crop&w=800&q=80" },
+            { title: "Sales Dashboard", url: "https://debeatzgh1.github.io/sales/", category: "Analytics", content: "High-conversion data visualization for sales teams.", thumb: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80" },
+            { title: "Modern Tailwind Home", url: "https://debeatzgh1.github.io/Modern-homepage-styling-with-TailwindCSS-/", category: "Web Design", content: "A landing page concept pushing Tailwind limits.", thumb: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=800&q=80" },
+            { title: "Popup Generator", url: "https://debeatzgh1.github.io/popup-html-page-generator-blogger/", category: "Utility", content: "Custom popup creator for Blogger and static sites.", thumb: "https://images.unsplash.com/photo-1586717791821-3f44a563eb4c?auto=format&fit=crop&w=800&q=80" },
+            { title: "Smart Floating Dock", url: "https://debeatzgh1.github.io/-Floating-Dock-Smart-Iframe-Modal/#", category: "Utility", content: "Innovative navigation system for multi-app experiences.", thumb: "https://images.unsplash.com/photo-1551650975-87deedd944c3?auto=format&fit=crop&w=800&q=80" }
+        ];
+
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Render Carousel
+        const carousel = document.getElementById('carousel');
+        const dots = document.getElementById('carousel-dots');
+        const featured = projects.slice(0, 5);
+
+        featured.forEach((p, i) => {
+            const slide = document.createElement('div');
+            slide.className = "min-w-full h-full relative";
+            slide.innerHTML = `
+                <img src="${p.thumb}" class="w-full h-full object-cover opacity-60" />
+                <div class="absolute inset-0 flex flex-col justify-end p-10 bg-gradient-to-t from-[#0f172a] to-transparent">
+                    <span class="text-blue-400 text-sm font-bold mb-2 tracking-widest uppercase">${p.category}</span>
+                    <h2 class="text-4xl font-bold mb-2">${p.title}</h2>
+                    <p class="max-w-xl text-slate-300">${p.content}</p>
+                </div>
+            `;
+            carousel.appendChild(slide);
+            
+            const dot = document.createElement('button');
+            dot.className = `w-2 h-2 rounded-full transition-all ${i === 0 ? 'bg-blue-500 w-6' : 'bg-slate-600'}`;
+            dots.appendChild(dot);
+        });
+
+        // Carousel Logic
+        let currentSlide = 0;
+        setInterval(() => {
+            currentSlide = (currentSlide + 1) % featured.length;
+            carousel.style.transform = `translateX(-${currentSlide * 100}%)`;
+            Array.from(dots.children).forEach((dot, i) => {
+                dot.className = `w-2 h-2 rounded-full transition-all ${i === currentSlide ? 'bg-blue-500 w-6' : 'bg-slate-600'}`;
+            });
+        }, 5000);
+
+        // Render Grid Cards
+        const grid = document.getElementById('project-grid');
+        projects.forEach(p => {
+            const card = document.createElement('div');
+            card.className = "glass rounded-2xl overflow-hidden hover:scale-[1.02] transition-all duration-300 group cursor-pointer border border-slate-800 hover:border-blue-500/50";
+            card.innerHTML = `
+                <div class="h-40 overflow-hidden relative">
+                    <img src="${p.thumb}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+                    <div class="absolute top-3 right-3 bg-blue-600 text-[10px] font-bold px-2 py-1 rounded uppercase tracking-wider">${p.category}</div>
+                </div>
+                <div class="p-5">
+                    <h3 class="text-lg font-bold mb-2 group-hover:text-blue-400 transition">${p.title}</h3>
+                    <p class="text-slate-400 text-sm mb-5 line-clamp-2">${p.content}</p>
+                    <div class="flex gap-2">
+                        <button onclick="loadPreview('${p.url}', '${p.title}')" class="flex-1 bg-blue-600/10 hover:bg-blue-600 text-blue-400 hover:text-white py-2 rounded-lg text-xs font-bold transition-all border border-blue-500/20">
+                            Launch Preview
+                        </button>
+                        <a href="${p.url}" target="_blank" class="p-2 bg-slate-800 hover:bg-slate-700 rounded-lg transition">
+                            <i data-lucide="external-link" class="w-4 h-4"></i>
+                        </a>
+                    </div>
+                </div>
+            `;
+            grid.appendChild(card);
+        });
+
+        // Preview Logic
+        function loadPreview(url, title) {
+            document.getElementById('iframe-placeholder').classList.add('hidden');
+            document.getElementById('iframe-loader').classList.remove('hidden');
+            const iframe = document.getElementById('main-iframe');
+            
+            iframe.src = url;
+            document.getElementById('view-title').innerText = title;
+            document.getElementById('view-url').innerText = url;
+            document.getElementById('external-link').onclick = () => window.open(url, '_blank');
+            
+            scrollToSection('viewer');
+
+            iframe.onload = () => {
+                document.getElementById('iframe-loader').classList.add('hidden');
+                // Tracking Event
+                gtag('event', 'preview_load', { 'project_title': title });
+            };
         }
-      });
-    });
-  });
-}
-function goToSlide(i){
-  if(i < 0) i = featured.length-1;
-  if(i >= featured.length) i = 0;
-  slideIndex = i;
-  const width = carouselTrack.clientWidth;
-  carouselTrack.style.transform = `translateX(-${i*width}px)`;
-  // dots
-  Array.from(carouselDots.children).forEach((d, idx)=> d.classList.toggle('active', idx===i));
-}
-window.addEventListener('resize', ()=>goToSlide(slideIndex));
 
-document.getElementById('prevSlide').addEventListener('click', ()=>{ goToSlide(slideIndex-1); pauseAutoSlide(); });
-document.getElementById('nextSlide').addEventListener('click', ()=>{ goToSlide(slideIndex+1); pauseAutoSlide(); });
+        // AI Summary Logic (Simulated)
+        const summaryText = "The Debeatzgh ecosystem currently features a diverse array of 18 digital assets. High-performance modules include a centralized AI Chat platform and the newly launched 'Floating Dock' system. The codebase shows a strong preference for TailwindCSS and Firebase integration, suggesting a scalable, cloud-first architecture optimized for side-hustle automation.";
+        
+        let charIndex = 0;
+        function typeSummary() {
+            if (charIndex < summaryText.length) {
+                document.getElementById('ai-summary').innerHTML += summaryText.charAt(charIndex);
+                charIndex++;
+                setTimeout(typeSummary, 20);
+            }
+        }
+        window.onload = () => {
+            document.getElementById('ai-summary').innerHTML = "";
+            typeSummary();
+            lucide.createIcons();
+        };
 
-let autoSlideInterval = null;
-function startAutoSlide(){
-  if(autoSlideInterval) clearInterval(autoSlideInterval);
-  autoSlideInterval = setInterval(()=> { goToSlide(slideIndex+1); }, 5000);
-}
-function pauseAutoSlide(){ if(autoSlideInterval) { clearInterval(autoSlideInterval); autoSlideInterval = null; setTimeout(startAutoSlide, 6000); } }
-
-// AI Summary (simple client-side)
-async function summarizeUrl(url){
-  summaryBox.innerText = "Generating summary… (attempting to fetch page)";
-  try{
-    // If a server endpoint is configured to handle OpenAI, use it (safer)
-    if(OPENAI_ENDPOINT){
-      const resp = await fetch(OPENAI_ENDPOINT, {
-        method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({url})
-      });
-      const data = await resp.json();
-      summaryBox.innerText = data.summary || (data.text || "No summary returned");
-      return;
-    }
-
-    // Fallback: use public CORS proxy to fetch raw HTML. Note: reliability depends on proxy.
-    const proxy = 'https://api.allorigins.win/raw?url=';
-    const fetchUrl = proxy + encodeURIComponent(url);
-    const res = await fetch(fetchUrl);
-    if(!res.ok) throw new Error('Fetch failed: ' + res.status);
-    const html = await res.text();
-    // extract visible text using DOMParser
-    const parser = new DOMParser();
-    const doc = parser.parseFromString(html, 'text/html');
-    // remove scripts and styles
-    doc.querySelectorAll('script,style,nav,header,footer,form').forEach(n=>n.remove());
-    const paragraphs = Array.from(doc.querySelectorAll('p')).map(p=>p.textContent.trim()).filter(Boolean);
-
-    let summary = '';
-    if(paragraphs.length >= 1){
-      // pick first 2 paragraphs and trim to first 2 sentences
-      const text = paragraphs.slice(0,3).join(' ');
-      const sentences = text.match(/[^\.!\?]+[\.!\?]+/g) || [text];
-      summary = sentences.slice(0,3).join(' ').trim();
-    } else {
-      // fallback: use title and meta description
-      const title = doc.querySelector('title') ? doc.querySelector('title').textContent : '';
-      const descMeta = doc.querySelector('meta[name="description"]') ? doc.querySelector('meta[name="description"]').getAttribute('content') : '';
-      summary = [title, descMeta].filter(Boolean).join(' — ');
-    }
-    summaryBox.innerText = summary || 'No textual content extracted for summary.';
-  } catch(err){
-    console.error(err);
-    summaryBox.innerText = 'Summary failed: ' + (err.message || err);
-  }
-}
-
-// "OpenAI (serverless)" modal hook (basic instructions)
-document.getElementById('openAIConfig').addEventListener('click', ()=>{
-  alert('To use a stronger AI summary (OpenAI), deploy a small serverless endpoint that accepts { url } and returns { summary }.\n\nFor security, do NOT expose your OpenAI key in the client. Set OPENAI_ENDPOINT in the script to your endpoint URL.');
-});
-
-// quick initialization
-renderCards();
-buildCarousel();
-startAutoSlide();
-updateTrackingUI('Launcher opened');
-
-// expose some helpers for debugging
-window._launcher = { loadPreview, summarizeUrl, sites };
-
-</script>
+        function scrollToSection(id) {
+            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
 </body>
 </html>
 
