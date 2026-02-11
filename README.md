@@ -1,6 +1,153 @@
 
 <html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+            --accent-blue: #38bdf8;
+            --accent-green: #10b981;
+            --text-light: #f8fafc;
+        }
+
+        .hero-banner {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--primary-gradient);
+            color: var(--text-light);
+            padding: 60px 20px;
+            border-radius: 16px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            margin: 20px auto;
+            max-width: 1000px;
+        }
+
+        /* Animated Background Element */
+        .hero-banner::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(56, 189, 248, 0.1) 0%, transparent 60%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-tagline {
+            background: rgba(56, 189, 248, 0.15);
+            color: var(--accent-blue);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 20px;
+            border: 1px solid rgba(56, 189, 248, 0.3);
+        }
+
+        .hero-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin: 0 0 15px 0;
+            letter-spacing: -0.02em;
+        }
+
+        .hero-subtitle {
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto 30px auto;
+            color: #cbd5e1;
+            line-height: 1.6;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-bottom: 35px;
+        }
+
+        .service-pill {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 12px;
+            border-radius: 12px;
+            backdrop-filter: blur(5px);
+            font-size: 0.85rem;
+            transition: 0.3s;
+        }
+
+        .service-pill:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--accent-blue);
+            transform: translateY(-3px);
+        }
+
+        .cta-button {
+            background: var(--accent-blue);
+            color: #0f172a;
+            padding: 14px 32px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 700;
+            display: inline-block;
+            transition: 0.3s;
+        }
+
+        .cta-button:hover {
+            background: #7dd3fc;
+            box-shadow: 0 0 20px rgba(56, 189, 248, 0.4);
+        }
+
+        @media (max-width: 600px) {
+            .hero-title { font-size: 1.8rem; }
+            .hero-subtitle { font-size: 1rem; }
+        }
+    </style>
+</head>
+<body>
+
+<section class="hero-banner">
+    <div class="hero-content">
+        <span class="hero-tagline">AI & DIGITAL CREATOR HUB</span>
+        <h1 class="hero-title">Empowering the Next Generation of Digital Entrepreneurs</h1>
+        <p class="hero-subtitle">
+            Insights on technology, AI, and productivity. We build custom chatbots, websites, and mobile apps to help you scale your online presence.
+        </p>
+
+        <div class="services-grid">
+            <div class="service-pill">🤖 Chatbot Dev</div>
+            <div class="service-pill">🌐 Web Design</div>
+            <div class="service-pill">📱 App Building</div>
+            <div class="service-pill">📈 AI Strategy</div>
+        </div>
+
+        <a href="#contact" class="cta-button">Start Building Your Assets</a>
+        
+        <p style="margin-top: 25px; font-size: 0.8rem; color: #94a3b8; font-style: italic;">
+            "Mastering the art of Digital design involves the iteration and innovation of templates for multiple audiences."
+        </p>
+    </div>
+</section>
+
+</body>
+</html>
+<html lang="en">
+<head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Floating Sales Banner</title>
