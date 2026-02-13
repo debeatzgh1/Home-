@@ -337,7 +337,7 @@
         }
 
         .iframe-container {
-            height: 70vh;
+            height: 100vh;
             width: 100%;
             border-radius: 12px;
             overflow: hidden;
@@ -562,132 +562,6 @@
 </body>
 </html>
 
-
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Debeatzgh Digital Hub</title>
-
-<style>
-/* ===== BASE ===== */
-body{
-  margin:0;
-  font-family:system-ui,-apple-system,BlinkMacSystemFont;
-  background:#f3f4f6;
-}
-
-/* ===== FLOATING BUTTON ===== */
-#floating-launcher{
-  position:fixed;
-  top:20px;
-  right:20px;
-  background:#16a34a;
-  color:#fff;
-  padding:8px 16px;
-  font-size:13px;
-  font-weight:600;
-  border-radius:20px;
-  box-shadow:0 4px 12px rgba(0,0,0,.25);
-  cursor:pointer;
-  z-index:9999;
-}
-
-/* ===== CAROUSEL ===== */
-.carousel-wrapper{
-  padding:40px 16px;
-}
-.carousel-wrapper h2{
-  text-align:center;
-}
-.search-wrapper{
-  max-width:420px;
-  margin:16px auto 24px;
-}
-#searchInput{
-  width:100%;
-  padding:12px 16px;
-  border-radius:14px;
-  border:1px solid #ddd;
-  font-size:14px;
-  outline:none;
-}
-#searchInput:focus{
-  border-color:#16a34a;
-}
-.carousel{
-  display:flex;
-  gap:20px;
-  overflow-x:auto;
-  scroll-snap-type:x mandatory;
-}
-.card{
-  min-width:300px;
-  background:#fff;
-  border-radius:18px;
-  box-shadow:0 10px 30px rgba(0,0,0,.15);
-  scroll-snap-align:center;
-  display:flex;
-  flex-direction:column;
-}
-.card img{
-  height:160px;
-  width:100%;
-  object-fit:cover;
-  border-radius:18px 18px 0 0;
-}
-.card-content{
-  padding:18px;
-  flex:1;
-}
-.card h3{
-  margin:0 0 8px;
-}
-.card p{
-  font-size:14px;
-  color:#555;
-}
-.card button{
-  margin-top:14px;
-  background:#16a34a;
-  color:#fff;
-  border:none;
-  padding:12px;
-  border-radius:14px;
-  font-weight:700;
-  cursor:pointer;
-}
-
-/* ===== OVERLAY ===== */
-#overlay{
-  position:fixed;
-  inset:0;
-  background:#fff;
-  display:none;
-  flex-direction:column;
-  z-index:10000;
-}
-#overlay-top{
-  background:#111;
-  color:#fff;
-  padding:12px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-}
-#overlay-close{
-  cursor:pointer;
-  font-size:20px;
-}
-#overlay iframe{
-  flex:1;
-  width:100%;
-  border:none;
-}
-</style>
-</head>
-
-<body>
 
 <!-- FLOATING WEB BUTTON -->
 <div id="floating-launcher">menu</div>
