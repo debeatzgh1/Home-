@@ -431,7 +431,7 @@
 
     // 3. Redirect Function
     function redirectToSales() {
-        window.location.href = "https://debeatzgh1.github.io/sales/";
+        window.location.href = "https://debeatzgh1.github.io/debeatzgh/";
     }
 
     // 4. Close Function
