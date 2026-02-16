@@ -1,4 +1,9 @@
-<style>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
         :root {
             --banner-bg: rgba(13, 17, 23, 0.85);
             --accent-pink: #FF1493;
@@ -138,8 +143,8 @@
             .banner-btn { padding: 8px 12px; }
         }
     </style>
-
-
+</head>
+<body>
 
     <div class="top-floating-banner">
         <div class="carousel-wrapper">
@@ -157,7 +162,7 @@
 
     <div id="milkshake-modal">
         <div class="modal-header">
-            <span style="color:white; font-family: sans-serif; font-weight: bold;">Digital creators Hub</span>
+            <span style="color:white; font-family: sans-serif; font-weight: bold;">Debeatzgh Hub</span>
             <button class="close-btn" onclick="closeMilkshake()">✕ Close</button>
         </div>
         <iframe id="msha-iframe" src=""></iframe>
@@ -183,6 +188,10 @@
             document.body.style.overflow = "auto"; // Re-enable scroll
         }
     </script>
+
+</body>
+</html>
+
 
 
 <style>
