@@ -1,11 +1,11 @@
 
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Creator OS | Matrix Hub</title>
+
+
+    
+    
+    Creator OS | Matrix Hub
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&family=JetBrains+Mono:wght@400;700&display=swap');
         
@@ -99,8 +99,8 @@
         @keyframes shake { 0%, 100% { transform: rotate(0); } 20% { transform: rotate(10deg); } 40% { transform: rotate(-10deg); } }
         .shake { animation: shake 0.5s ease-in-out; }
     </style>
-</head>
-<body>
+
+
 
     <audio id="notify-sound" src="https://assets.mixkit.co/active_storage/sfx/2358/2358-preview.mp3"></audio>
 
@@ -114,7 +114,7 @@
     <div id="notification-wrapper">
         <div id="gist-notifier" onclick="handleFormLaunch()">
             <span id="comment-badge" class="absolute -top-1 -right-1 bg-red-500 w-3 h-3 rounded-full hidden"></span>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#58a6ff" stroke-width="2.5"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+            <svg width="18" height="18" viewbox="0 0 24 24" fill="none" stroke="#58a6ff" stroke-width="2.5"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
         </div>
         <div id="notify-bubble"><span id="type-text"></span></div>
     </div>
@@ -176,7 +176,7 @@
                     document.getElementById('notify-bubble').classList.add('show');
                     document.getElementById('comment-badge').classList.remove('hidden');
                     document.getElementById('gist-notifier').classList.add('shake');
-                    typeWriter("Incoming Form Request...");
+                    typeWriter(" comment /Request...");
                     document.addEventListener('mouseover', () => { document.getElementById('notify-sound').play().catch(()=>{}) }, {once:true});
                 }, 1500);
             }
@@ -206,8 +206,8 @@
         window.onload = () => { initBg(); animateBg(); checkNotification(); };
         window.onresize = initBg;
     </script>
-</body>
-</html>
+
+</!doctype>
 
 
 
