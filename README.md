@@ -1,214 +1,193 @@
+<!doctype html>
 
 
-
-    
-    
-    Creator OS | Matrix Hub
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&family=JetBrains+Mono:wght@400;700&display=swap');
-        
         :root {
-            --notify-red: #ff3e3e;
-            --gist-blue: #58a6ff;
-            --glass-dark: rgba(10, 15, 28, 0.9);
+            --notify-color: #ff3e3e;
+            --gist-accent: #58a6ff;
+            --glass-bg: rgba(13, 17, 23, 0.95);
         }
 
-        body { background: #02040a; color: #e2e8f0; font-family: 'Space Grotesk', sans-serif; overflow: hidden; margin: 0; }
-        #bg-canvas { position: fixed; inset: 0; z-index: -1; }
-        .glass { background: var(--glass-dark); backdrop-filter: blur(20px); border: 1px solid rgba(56, 189, 248, 0.1); }
-
-        /* --- LEFT MIDDLE NOTIFICATION --- */
-        #notification-wrapper {
-            position: fixed;
-            left: 20px;
-            top: 50%;
-            transform: translateY(-50%);
-            display: flex;
-            align-items: center;
-            z-index: 9999;
-        }
-
+        /* 1. FLOATING NOTIFICATION ICON */
         #gist-notifier {
-            width: 45px; /* Shrunk size */
-            height: 45px;
-            background: var(--glass-dark);
-            border: 1px solid rgba(88, 166, 255, 0.3);
+            position: fixed;
+            center: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: var(--glass-bg);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            box-shadow: 0 0 20px rgba(88, 166, 255, 0.2);
-            order: 1; /* Bell on left */
+            z-index: 9999;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        #gist-notifier:hover { transform: scale(1.1); }
+
+        /* Notification Badge */
+        .badge {
+            position: absolute;
+            top: -2px;
+            right: -2px;
+            background: var(--notify-color);
+            color: white;
+            font-size: 10px;
+            font-weight: bold;
+            padding: 4px 8px;
+            border-radius: 10px;
+            border: 2px solid #0d1117;
+            animation: pulse-ring 1.5s infinite;
+        }
+
+        @keyframes pulse-ring {
+            0% { box-shadow: 0 0 0 0 rgba(255, 62, 62, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(255, 62, 62, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 62, 62, 0); }
+        }
+
+        /* 2. OVERLAY INTERFACE */
+        #gist-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(10px);
+            display: none;
+            z-index: 10000;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            padding: 20px;
+        }
+
+        #gist-overlay.active {
+            display: flex;
+            opacity: 1;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-container {
+            width: 100%;
+            max-width: 900px;
+            height: 85vh;
+            background: #0d1117;
+            border-radius: 20px;
+            border: 1px solid var(--gist-accent);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
             position: relative;
         }
 
-        #notify-bubble {
-            background: #fff;
-            color: #0d1117;
-            padding: 8px 15px;
-            border-radius: 10px;
-            margin-left: 12px; /* Gap from left bell */
-            font-size: 11px;
-            font-weight: 800;
-            opacity: 0;
-            transform: translateX(-10px);
-            transition: 0.4s;
-            white-space: nowrap;
-            order: 2; /* Text on right of bell */
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-            pointer-events: none;
+        .modal-header {
+            padding: 15px 25px;
+            background: #161b22;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
         }
-        #notify-bubble.show { opacity: 1; transform: translateX(0); }
 
-        /* --- HUB LAUNCHER (MINI) --- */
-        #hub-launcher {
-            position: fixed;
-            left: 0;
-            top: 50%;
-            transform: translateY(-50%);
-            background: var(--glass-dark);
-            color: var(--gist-blue);
-            padding: 15px 8px;
-            border-radius: 0 10px 10px 0;
-            font-size: 9px;
-            font-weight: 900;
-            writing-mode: vertical-rl;
-            text-orientation: mixed;
-            letter-spacing: 2px;
-            border: 1px solid rgba(88, 166, 255, 0.2);
-            border-left: none;
+        .modal-header h3 {
+            margin: 0;
+            color: white;
+            font-size: 14px;
+            font-family: sans-serif;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .close-gist {
+            background: none;
+            border: none;
+            color: #8b949e;
+            font-size: 24px;
             cursor: pointer;
-            display: none;
-            z-index: 9998;
-            transition: 0.3s;
+            line-height: 1;
         }
-        #hub-launcher:hover { background: var(--gist-blue); color: #000; }
 
-        /* --- FORM OVERLAY --- */
-        #gist-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.95); backdrop-filter: blur(10px); display: none; z-index: 10000; justify-content: center; align-items: center; }
-        .modal-container { width: 95%; max-width: 600px; height: 85vh; background: #0d1117; border-radius: 20px; display: flex; flex-direction: column; border: 1px solid #30363d; overflow: hidden; }
-        iframe { width: 100%; height: 100%; border: none; display: none; }
-        
-        .spinner-box { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; gap: 15px; }
-        .spinner { width: 30px; height: 30px; border: 2px solid rgba(88, 166, 255, 0.1); border-top: 2px solid var(--gist-blue); border-radius: 50%; animation: spin 0.8s linear infinite; }
-        @keyframes spin { 100% { transform: rotate(360deg); } }
+        .close-gist:hover { color: white; }
 
-        @keyframes shake { 0%, 100% { transform: rotate(0); } 20% { transform: rotate(10deg); } 40% { transform: rotate(-10deg); } }
-        .shake { animation: shake 0.5s ease-in-out; }
+        /* 3. THE IFRAME */
+        #gist-frame {
+            width: 100%;
+            flex-grow: 1;
+            border: none;
+        }
+
+        .share-prompt {
+            padding: 10px;
+            text-align: center;
+            background: var(--gist-accent);
+            color: #0d1117;
+            font-size: 12px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
     </style>
 
 
 
-    <audio id="notify-sound" src="https://assets.mixkit.co/active_storage/sfx/2358/2358-preview.mp3"></audio>
-
-    <canvas id="bg-canvas"></canvas>
-
-    <div id="main-ui" class="max-w-4xl mx-auto px-6 pt-20">
-        <h1 class="text-4xl font-black text-white">MATRIX_<span class="text-cyan-500">OS</span></h1>
-        <p class="text-slate-500 text-xs mt-2 tracking-widest">SYSTEM STATUS: NOMINAL</p>
+    <div id="gist-notifier" onclick="openGist()">
+        <span class="badge">NEW</span>
+        <svg width="28" height="28" viewbox="0 0 24 24" fill="none" stroke="#58a6ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+            <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+        </svg>
     </div>
-
-    <div id="notification-wrapper">
-        <div id="gist-notifier" onclick="handleFormLaunch()">
-            <span id="comment-badge" class="absolute -top-1 -right-1 bg-red-500 w-3 h-3 rounded-full hidden"></span>
-            <svg width="18" height="18" viewbox="0 0 24 24" fill="none" stroke="#58a6ff" stroke-width="2.5"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
-        </div>
-        <div id="notify-bubble"><span id="type-text"></span></div>
-    </div>
-
-    <button id="hub-launcher" onclick="handleFormLaunch()">OPEN_INPUT_FORM</button>
 
     <div id="gist-overlay">
         <div class="modal-container">
-            <div class="flex justify-between items-center p-4 bg-[#161b22] border-b border-[#30363d]">
-                <span class="text-[9px] font-bold text-slate-500 tracking-widest uppercase">Secure_Form_Channel</span>
-                <button onclick="closeOverlay()" class="text-white text-xl">&times;</button>
+            <div class="modal-header">
+                <h3>
+                    <svg width="18" height="18" viewbox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></path></svg>
+                    Community Reactions & Comments
+                </h3>
+                <button class="close-gist" onclick="closeGist()">&times;</button>
             </div>
-            <div id="form-loader" class="spinner-box">
-                <div class="spinner"></div>
-                <div class="text-[9px] text-cyan-500 font-bold uppercase tracking-tighter">Connecting to Server...</div>
-            </div>
-            <iframe id="form-iframe" src=""></iframe>
+            <div class="share-prompt">Share your thoughts or leave a reaction below!</div>
+            <iframe id="gist-frame" src=""></iframe>
         </div>
     </div>
 
     <script>
-        // Background Particles
-        const canvas = document.getElementById('bg-canvas');
-        const ctx = canvas.getContext('2d');
-        let particles = [];
-        function initBg() {
-            canvas.width = window.innerWidth; canvas.height = window.innerHeight;
-            particles = Array.from({length: 40}, () => ({
-                x: Math.random()*canvas.width, y: Math.random()*canvas.height,
-                vx: (Math.random()-0.5)*0.2, vy: (Math.random()-0.5)*0.2
-            }));
-        }
-        function animateBg() {
-            ctx.clearRect(0,0,canvas.width,canvas.height);
-            particles.forEach(p => {
-                p.x += p.vx; p.y += p.vy;
-                if(p.x<0||p.x>canvas.width) p.vx*=-1;
-                if(p.y<0||p.y>canvas.height) p.vy*=-1;
-                ctx.fillStyle = 'rgba(88,166,255,0.1)';
-                ctx.beginPath(); ctx.arc(p.x, p.y, 1, 0, Math.PI*2); ctx.fill();
-            });
-            requestAnimationFrame(animateBg);
-        }
+        const overlay = document.getElementById('gist-overlay');
+        const frame = document.getElementById('gist-frame');
+        const gistUrl = "https://form.jotform.com/241335470278053";
 
-        // Typewriter logic
-        function typeWriter(text, i=0) {
-            if (i < text.length) {
-                document.getElementById('type-text').innerHTML += text.charAt(i);
-                setTimeout(() => typeWriter(text, i+1), 40);
-            }
-        }
-
-        function checkNotification() {
-            if (localStorage.getItem('form_seen')) {
-                document.getElementById('notification-wrapper').style.display = 'none';
-                document.getElementById('hub-launcher').style.display = 'block';
-            } else {
-                setTimeout(() => {
-                    document.getElementById('notify-bubble').classList.add('show');
-                    document.getElementById('comment-badge').classList.remove('hidden');
-                    document.getElementById('gist-notifier').classList.add('shake');
-                    typeWriter(" comment /Request...");
-                    document.addEventListener('mouseover', () => { document.getElementById('notify-sound').play().catch(()=>{}) }, {once:true});
-                }, 1500);
-            }
-        }
-
-        function handleFormLaunch() {
-            const iframe = document.getElementById('form-iframe');
-            const overlay = document.getElementById('gist-overlay');
-            const loader = document.getElementById('form-loader');
-            
+        function openGist() {
+            // We point to the comment anchor directly
+            frame.src = gistUrl;
             overlay.style.display = 'flex';
-            if (iframe.src === "" || iframe.src !== "https://form.svhrt.com/60f4a0aeedc1993c8c7b3989") {
-                iframe.src = "https://form.svhrt.com/60f4a0aeedc1993c8c7b3989";
-                iframe.onload = () => {
-                    loader.style.display = 'none';
-                    iframe.style.display = 'block';
-                };
-            }
+            setTimeout(() => overlay.classList.add('active'), 10);
+            document.body.style.overflow = 'hidden';
             
-            localStorage.setItem('form_seen', 'true');
-            document.getElementById('notification-wrapper').style.display = 'none';
-            document.getElementById('hub-launcher').style.display = 'block';
+            // Remove badge once viewed
+            const badge = document.querySelector('.badge');
+            if(badge) badge.style.display = 'none';
         }
 
-        function closeOverlay() { document.getElementById('gist-overlay').style.display = 'none'; }
+        function closeGist() {
+            overlay.classList.remove('active');
+            setTimeout(() => {
+                overlay.style.display = 'none';
+                frame.src = "";
+            }, 400);
+            document.body.style.overflow = 'auto';
+        }
 
-        window.onload = () => { initBg(); animateBg(); checkNotification(); };
-        window.onresize = initBg;
+        // Auto-close on clicking outside the container
+        overlay.onclick = function(e) {
+            if (e.target === overlay) closeGist();
+        };
     </script>
 
 </!doctype>
-
 
 
 ## Welcome to creators Hub, Access Your productivity tools in one place 
