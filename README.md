@@ -350,7 +350,7 @@ Through these channels, are insights on technology, artificial intelligence, and
             const iframe = document.getElementById('msha-iframe');
             
             // Set source only when clicked to save performance
-            iframe.src = "https://debeatzgh1.github.io/firebase-front-end-components/";
+            iframe.src = "https://beatzde4.blogspot.com/p/advertise-online-for-free.html";
             modal.style.display = "flex";
             document.body.style.overflow = "hidden"; // Disable scroll
         }
