@@ -1,4 +1,228 @@
 
+<html lang="en-GB">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Creators Hub – AI Tools, Side Hustles & Digital Growth</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#0F2A44',
+            secondary: '#1E88E5',
+            accent: '#00C2A8',
+            highlight: '#6C63FF',
+            bg: '#F8FAFC'
+          },
+          fontFamily: {
+            heading: ['Poppins','sans-serif'],
+            body: ['Inter','sans-serif']
+          }
+        }
+      }
+    }
+    </script>
+
+    <style>
+    /* Custom Animations */
+    @keyframes heartbeat {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+    }
+    .animate-heartbeat { animation: heartbeat 1.5s infinite; }
+
+    /* Glassmorphism Header for Iframe */
+    .glass-header {
+      background: rgba(15, 42, 68, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    /* Prevent scrolling when overlay is open */
+    .no-scroll { overflow: hidden; }
+    </style>
+</head>
+
+<body class="bg-bg font-body text-gray-800 transition-colors duration-300">
+
+<header class="sticky top-0 z-40 bg-white/80 backdrop-blur-md shadow-sm border-b border-gray-100">
+  <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+    <button onclick="openFrame('https://debeatzgh1.github.io/Home-/')" class="text-2xl font-heading font-bold text-primary hover:text-secondary transition">
+      Debeatzgh
+    </button>
+    <nav class="hidden md:flex gap-8 font-medium">
+      <button onclick="openFrame('https://debeatzgh1.github.io/Home-/')" class="hover:text-secondary transition">Home</button>
+      <button onclick="openFrame('https://debeatzgh1.github.io/-My-Brand-Online-Digital-Products-Affiliate-Shop/')" class="hover:text-secondary transition">Products</button>
+      <button onclick="openFrame('https://debeatzgh1.github.io/The-Ultimate-Guide-to-Side-Hustle/')" class="hover:text-secondary transition">Side Hustle</button>
+      <button onclick="openFrame('https://msha.ke/debeatzgh')" class="hover:text-secondary transition">Hub</button>
+    </nav>
+    <button onclick="openFrame('https://msha.ke/debeatzgh')" class="bg-secondary text-white px-5 py-2 rounded-xl shadow-lg hover:bg-primary transition-all hover:scale-105 active:scale-95">
+      Open Hub
+    </button>
+  </div>
+</header>
+
+<section class="max-w-7xl mx-auto px-4 py-16 grid md:grid-cols-2 gap-12 items-center">
+  <div class="animate-fade-in">
+    <h2 class="text-4xl md:text-5xl font-heading font-bold text-primary leading-tight">
+      Build Income with <span class="text-secondary">AI Tools</span> & Smart Side Hustles
+    </h2>
+    <p class="mt-6 text-lg text-gray-600">
+      Premium AI tools, blogging guides, and digital products — curated to help you scale your online presence.
+    </p>
+    <div class="mt-8 flex flex-wrap gap-4">
+      <button onclick="openFrame('https://debeatzgh1.github.io/-My-Brand-Online-Digital-Products-Affiliate-Shop/')" class="bg-secondary text-white px-8 py-3 rounded-xl shadow-md hover:scale-105 transition">
+        View Products
+      </button>
+      <button onclick="openFrame('https://debeatzgh1.github.io/debeatzgh/')" class="border-2 border-secondary text-secondary font-bold px-8 py-3 rounded-xl hover:bg-secondary hover:text-white transition">
+        Get the Guide
+      </button>
+    </div>
+  </div>
+
+  <div class="relative group cursor-pointer" onclick="openFrame('https://debeatzgh.wordpress.com/')">
+    <div class="absolute -inset-1 bg-gradient-to-r from-secondary to-accent rounded-2xl blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
+    <div class="relative bg-white rounded-xl shadow-xl overflow-hidden">
+      <img src="https://images.unsplash.com/photo-1674027444485-cec3da58eef4" class="w-full h-full object-cover transform group-hover:scale-105 transition duration-500">
+    </div>
+  </div>
+</section>
+
+<section class="bg-white py-16">
+  <div class="max-w-7xl mx-auto px-4">
+    <div class="grid md:grid-cols-3 gap-8">
+      <div onclick="openFrame('https://debeatzgh.wordpress.com/')" class="p-8 rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all cursor-pointer">
+        <span class="bg-accent/10 text-accent font-bold px-3 py-1 rounded-lg text-xs">MAIN HUB</span>
+        <h4 class="mt-4 font-heading text-xl font-bold">Central Link Hub</h4>
+        <p class="mt-2 text-gray-600 text-sm">Every tool and platform you need, consolidated in one place.</p>
+      </div>
+
+      <div onclick="openFrame('https://docs.google.com/forms/d/e/1FAIpQLSdXCPUz1JBq0W8MHN9VOE0p6cnp5Wtr74Ox2gqLLyzKi0UwKA/viewform?usp=dialog')" class="p-8 rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all cursor-pointer">
+        <span class="bg-highlight/10 text-highlight font-bold px-3 py-1 rounded-lg text-xs">RESOURCES</span>
+        <h4 class="mt-4 font-heading text-xl font-bold">Digital Tools</h4>
+        <p class="mt-2 text-gray-600 text-sm">Access exclusive AI prompts and digital asset libraries.</p>
+      </div>
+
+      <div onclick="openFrame('https://debeatzgh1.github.io/debeatzgh/')" class="p-8 rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all cursor-pointer">
+        <span class="bg-secondary/10 text-secondary font-bold px-3 py-1 rounded-lg text-xs">STRATEGY</span>
+        <h4 class="mt-4 font-heading text-xl font-bold">Side Hustle Guide</h4>
+        <p class="mt-2 text-gray-600 text-sm">Step-by-step blueprints for launching your digital business.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="fixed bottom-6 left-6 flex flex-col gap-3 z-40">
+    <button onclick="openFrame('https://debeatzgh.wordpress.com/dkonsult/')" class="bg-accent text-white w-14 h-14 rounded-full shadow-2xl flex items-center justify-center text-2xl animate-heartbeat hover:scale-110 active:scale-95 transition">
+      ❯
+    </button>
+</div>
+
+<div id="iframeOverlay" class="fixed inset-0 bg-primary/95 hidden z-[100] backdrop-blur-md">
+  <div class="absolute inset-2 md:inset-6 bg-white rounded-2xl shadow-2xl overflow-hidden flex flex-col border border-white/10">
+    
+    <div class="flex items-center justify-between glass-header text-white px-4 py-3">
+      <div class="flex gap-6 items-center">
+        <button onclick="frameBack()" class="hover:text-accent transition">⟵</button>
+        <button onclick="frameForward()" class="hover:text-accent transition">⟶</button>
+        <button id="authBtn" onclick="disableLoop()" class="text-xs font-bold px-3 py-1 border border-white/20 rounded-full hover:bg-white/10 transition">Sign In to Disable Loop</button>
+      </div>
+      <div class="flex gap-5 items-center">
+        <button onclick="toggleFullscreen()" class="hover:text-accent text-xl">⛶</button>
+        <button id="closeBtn" onclick="closeFrame()" class="bg-red-500/20 text-red-400 hover:bg-red-500 hover:text-white px-4 py-1 rounded-full text-sm font-bold transition duration-300">Wait (3s)</button>
+      </div>
+    </div>
+
+    <iframe id="contentFrame" class="flex-1 w-full bg-white" title="Debeatzgh Content"></iframe>
+  </div>
+</div>
+
+<script>
+const frame = document.getElementById('contentFrame');
+const overlay = document.getElementById('iframeOverlay');
+const closeBtn = document.getElementById('closeBtn');
+const authBtn = document.getElementById('authBtn');
+let popupInterval;
+let countdownInterval;
+
+function openFrame(url){
+  // Referral check: Don't pop if already coming from the same domain
+  if (document.referrer.includes("debeatzgh")) return;
+
+  frame.src = url;
+  overlay.classList.remove('hidden');
+  document.body.classList.add('no-scroll');
+  startCloseCountdown();
+}
+
+function startCloseCountdown() {
+  let timer = 3;
+  closeBtn.disabled = true;
+  closeBtn.classList.add('opacity-50', 'cursor-not-allowed');
+  closeBtn.innerText = `Wait (${timer}s)`;
+
+  clearInterval(countdownInterval);
+  countdownInterval = setInterval(() => {
+    timer--;
+    if (timer > 0) {
+      closeBtn.innerText = `Wait (${timer}s)`;
+    } else {
+      clearInterval(countdownInterval);
+      closeBtn.innerText = "Close [X]";
+      closeBtn.disabled = false;
+      closeBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+    }
+  }, 1000);
+}
+
+function closeFrame(){
+  if (closeBtn.disabled) return;
+  overlay.classList.add('hidden');
+  document.body.classList.remove('no-scroll');
+  frame.src = '';
+}
+
+function disableLoop() {
+  clearInterval(popupInterval);
+  authBtn.innerText = "Loop Deactivated ✓";
+  authBtn.classList.add('bg-green-500/20', 'text-green-400');
+  authBtn.disabled = true;
+}
+
+// 6-Second Auto Pop-up Logic
+popupInterval = setInterval(() => {
+    if (overlay.classList.contains('hidden')) {
+        openFrame('https://debeatzgh.wordpress.com/');
+    }
+}, 6000);
+
+function frameBack(){ frame.contentWindow.history.back(); }
+function frameForward(){ frame.contentWindow.history.forward(); }
+
+function toggleFullscreen(){
+  const box = overlay.querySelector('div');
+  if(!document.fullscreenElement) box.requestFullscreen().catch(e => console.log(e));
+  else document.exitFullscreen();
+}
+
+// Initial Trigger on Load
+window.onload = () => {
+    setTimeout(() => openFrame('https://debeatzgh.wordpress.com/'), 1500);
+};
+</script>
+
+</body>
+</html>
+
+
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
