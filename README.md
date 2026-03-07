@@ -54,7 +54,7 @@
 
 <header class="sticky top-0 z-40 bg-white/80 backdrop-blur-md shadow-sm border-b border-gray-100">
   <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
-    <button onclick="openFrame('https://debeatzgh1.github.io/Home-/')" class="text-2xl font-heading font-bold text-primary hover:text-secondary transition">
+    <button onclick="openFrame('https://github.com/apps/dkonsult')" class="text-2xl font-heading font-bold text-primary hover:text-secondary transition">
       Debeatzgh
     </button>
     <nav class="hidden md:flex gap-8 font-medium">
@@ -303,7 +303,7 @@ window.onload = () => {
             Mastering the art of Blogging, Freelancing, and Digital Design through the iteration and innovation of content for multiple audiences.
         </p>
         <div class="flex flex-wrap justify-center gap-6" data-aos="zoom-in" data-aos-delay="200">
-            <a href="https://wa.me/233549757544" class="bg-white text-black px-10 py-5 rounded-2xl font-black text-sm uppercase tracking-wider hover:bg-cyan-400 transition">Hire Me</a>
+            <a href="https://wa.me/233270201181" class="bg-white text-black px-10 py-5 rounded-2xl font-black text-sm uppercase tracking-wider hover:bg-cyan-400 transition">Hire Me</a>
             <a href="#docs" class="glass-card px-10 py-5 rounded-2xl font-black text-sm uppercase tracking-wider">Productivity Tools</a>
         </div>
     </section>
@@ -328,7 +328,7 @@ window.onload = () => {
                 <h2 class="text-4xl font-extrabold mb-4">Google Docs Content</h2>
                 <p class="text-gray-500 max-w-lg">Unlock efficiency with ready-made templates for students, entrepreneurs, and freelancers.</p>
             </div>
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSdipVP7tU1hjTjECfWUdnhzWN-PROdQp19ng25EUDJk5-8JzA/viewform" class="text-cyan-400 font-bold uppercase text-xs border-b border-cyan-400/30 pb-1">Enquire for Custom Docs</a>
+            <a href="https://github.com/apps/dkonsult" class="text-cyan-400 font-bold uppercase text-xs border-b border-cyan-400/30 pb-1">Enquire for Custom Docs</a>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -406,7 +406,7 @@ window.onload = () => {
         <button onclick="toggleChat()" class="w-14 h-14 bg-cyan-500 text-black rounded-full shadow-2xl flex items-center justify-center hover:scale-110 transition">
             <i class="fas fa-comment-dots text-xl"></i>
         </button>
-        <a href="https://wa.me/233549757544" class="w-14 h-14 bg-[#25D366] text-white rounded-full shadow-2xl flex items-center justify-center hover:scale-110 transition">
+        <a href="https://wa.me/233270201181" class="w-14 h-14 bg-[#25D366] text-white rounded-full shadow-2xl flex items-center justify-center hover:scale-110 transition">
             <i class="fab fa-whatsapp text-2xl"></i>
         </a>
     </div>
