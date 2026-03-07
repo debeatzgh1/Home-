@@ -72,7 +72,7 @@
 <section class="max-w-7xl mx-auto px-4 py-16 grid md:grid-cols-2 gap-12 items-center">
   <div class="animate-fade-in">
     <h2 class="text-4xl md:text-5xl font-heading font-bold text-primary leading-tight">
-      Build Income with <span class="text-secondary">AI Tools</span> & Smart Side Hustles
+      Build Assets with <span class="text-secondary">AI Tools</span> & Smart Side Hustles
     </h2>
     <p class="mt-6 text-lg text-gray-600">
       Premium AI tools, blogging guides, and digital products — curated to help you scale your online presence.
@@ -104,7 +104,7 @@
         <p class="mt-2 text-gray-600 text-sm">Every tool and platform you need, consolidated in one place.</p>
       </div>
 
-      <div onclick="openFrame('https://debeatzgh1.github.io/Blogger-sign-up-button-/')" class="p-8 rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all cursor-pointer">
+      <div onclick="openFrame('https://github.com/apps/dkonsult')" class="p-8 rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all cursor-pointer">
         <span class="bg-highlight/10 text-highlight font-bold px-3 py-1 rounded-lg text-xs">RESOURCES</span>
         <h4 class="mt-4 font-heading text-xl font-bold">Digital Tools</h4>
         <p class="mt-2 text-gray-600 text-sm">Access exclusive AI prompts and digital asset libraries.</p>
@@ -196,7 +196,7 @@ function disableLoop() {
   authBtn.disabled = true;
 }
 
-// 6-Second Auto Pop-up Logic
+// 15-Second Auto Pop-up Logic
 popupInterval = setInterval(() => {
     if (overlay.classList.contains('hidden')) {
         openFrame('https://debeatzgh.wordpress.com/');
@@ -288,7 +288,7 @@ window.onload = () => {
         </div>
         <div class="flex gap-4">
             <button onclick="toggleAuth()" class="text-xs font-bold text-gray-300 hover:text-white transition">Sign In</button>
-            <a href="https://forms.gle/Pm5PK45qN5KGELbt7" class="bg-cyan-500 text-black px-6 py-2 rounded-xl font-extrabold text-[10px] uppercase tracking-tighter hover:scale-105 transition">Sign Up</a>
+            <a href="https://github.com/apps/dkonsult" class="bg-cyan-500 text-black px-6 py-2 rounded-xl font-extrabold text-[10px] uppercase tracking-tighter hover:scale-105 transition">Sign Up</a>
         </div>
     </nav>
 
@@ -377,10 +377,10 @@ window.onload = () => {
             <div class="glass-card p-10" data-aos="fade-left">
                 <h3 class="text-2xl font-bold mb-6 text-center">Inquiry & Feedback</h3>
                 <div class="flex flex-col gap-4">
-                    <a href="https://forms.gle/SArJCF7yj1J46hdw9" class="p-4 bg-white/5 border border-white/10 rounded-2xl hover:border-cyan-400 transition flex justify-between">
+                    <a href="https://github.com/apps/dkonsult" class="p-4 bg-white/5 border border-white/10 rounded-2xl hover:border-cyan-400 transition flex justify-between">
                         <span class="font-bold text-sm">Suggestions Form</span> <i class="fas fa-arrow-right"></i>
                     </a>
-                    <a href="https://forms.gle/Pm5PK45qN5KGELbt7" class="p-4 bg-white/5 border border-white/10 rounded-2xl hover:border-cyan-400 transition flex justify-between">
+                    <a href="https://github.com/apps/dkonsult" class="p-4 bg-white/5 border border-white/10 rounded-2xl hover:border-cyan-400 transition flex justify-between">
                         <span class="font-bold text-sm">Sign In / Sign Up</span> <i class="fas fa-user-plus"></i>
                     </a>
                 </div>
