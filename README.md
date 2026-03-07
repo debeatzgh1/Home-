@@ -104,7 +104,7 @@
         <p class="mt-2 text-gray-600 text-sm">Every tool and platform you need, consolidated in one place.</p>
       </div>
 
-      <div onclick="openFrame('https://docs.google.com/forms/d/e/1FAIpQLSdXCPUz1JBq0W8MHN9VOE0p6cnp5Wtr74Ox2gqLLyzKi0UwKA/viewform?usp=dialog')" class="p-8 rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all cursor-pointer">
+      <div onclick="openFrame('https://debeatzgh1.github.io/Blogger-sign-up-button-/')" class="p-8 rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all cursor-pointer">
         <span class="bg-highlight/10 text-highlight font-bold px-3 py-1 rounded-lg text-xs">RESOURCES</span>
         <h4 class="mt-4 font-heading text-xl font-bold">Digital Tools</h4>
         <p class="mt-2 text-gray-600 text-sm">Access exclusive AI prompts and digital asset libraries.</p>
