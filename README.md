@@ -1,4 +1,220 @@
 
+<div id="wp-identity-popup" class="wp-popup-overlay">
+    <div class="wp-popup-card">
+        <button onclick="closeWPPopup()" class="wp-close-btn">
+            <i class="fas fa-times"></i>
+        </button>
+
+        <div class="wp-header">
+            <div class="wp-icon-box">
+                <i class="fab fa-wordpress text-2xl text-white"></i>
+            </div>
+            <div class="wp-badge">Free Lifetime Access</div>
+        </div>
+
+        <div class="wp-body">
+            <h2 class="wp-title">Secure Your <span class="text-cyan-400">Identity</span></h2>
+            
+            <div class="wp-slider-container">
+                <div class="wp-slider-track">
+                    <div class="wp-slide">Create <strong>name.debeatzgh.com</strong> today.</div>
+                    <div class="wp-slide">Professional hosting, $0.00 cost.</div>
+                    <div class="wp-slide">Launch your portfolio in 60 seconds.</div>
+                </div>
+            </div>
+
+            <p class="wp-description">
+                Join the DeBeatzGH network. Claim your custom WordPress site and start building your digital presence with premium tools.
+            </p>
+
+            <button onclick="launchWPSignup()" class="wp-submit-btn">
+                <span>Create My Free Site</span>
+                <i class="fas fa-arrow-right ml-2"></i>
+            </button>
+            
+            <p class="text-[9px] text-gray-500 mt-4 uppercase tracking-[0.2em]">No credit card required • Instant Activation</p>
+        </div>
+    </div>
+</div>
+
+<style>
+    .wp-popup-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(5, 5, 7, 0.9);
+        backdrop-filter: blur(8px);
+        z-index: 30000;
+        display: none; /* Controlled by JS */
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+    }
+
+    .wp-popup-card {
+        background: rgba(15, 15, 20, 0.95);
+        width: 100%;
+        max-width: 420px;
+        border-radius: 24px;
+        border: 1px solid rgba(0, 242, 255, 0.2);
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 20px rgba(0, 242, 255, 0.1);
+        animation: wpPopIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    @keyframes wpPopIn {
+        from { transform: scale(0.9) translateY(30px); opacity: 0; }
+        to { transform: scale(1) translateY(0); opacity: 1; }
+    }
+
+    .wp-close-btn {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.05);
+        border: none;
+        color: #64748b;
+        cursor: pointer;
+        transition: 0.3s;
+        z-index: 10;
+    }
+
+    .wp-close-btn:hover { background: #ef4444; color: white; }
+
+    .wp-header {
+        height: 120px;
+        background: linear-gradient(135deg, #00f2ff22 0%, #3b82f622 100%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+    }
+
+    .wp-icon-box {
+        width: 50px;
+        height: 50px;
+        background: #21759b; /* WordPress Blue */
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 0 20px rgba(33, 117, 155, 0.4);
+    }
+
+    .wp-badge {
+        margin-top: 12px;
+        font-size: 9px;
+        font-weight: 900;
+        text-transform: uppercase;
+        color: #00f2ff;
+        letter-spacing: 1px;
+        background: rgba(0, 242, 255, 0.1);
+        padding: 4px 12px;
+        border-radius: 99px;
+    }
+
+    .wp-body { padding: 30px; text-align: center; }
+
+    .wp-title {
+        font-size: 24px;
+        font-weight: 800;
+        letter-spacing: -0.5px;
+        margin-bottom: 15px;
+    }
+
+    /* Slider Styles */
+    .wp-slider-container {
+        height: 20px;
+        overflow: hidden;
+        margin-bottom: 20px;
+    }
+
+    .wp-slider-track {
+        animation: wpSlideMove 9s infinite;
+    }
+
+    .wp-slide {
+        height: 20px;
+        font-size: 13px;
+        color: #94a3b8;
+    }
+
+    @keyframes wpSlideMove {
+        0%, 28% { transform: translateY(0); }
+        33%, 61% { transform: translateY(-20px); }
+        66%, 94% { transform: translateY(-40px); }
+        100% { transform: translateY(0); }
+    }
+
+    .wp-description {
+        font-size: 13px;
+        color: #64748b;
+        line-height: 1.6;
+        margin-bottom: 25px;
+    }
+
+    .wp-submit-btn {
+        width: 100%;
+        background: #00f2ff;
+        color: #000;
+        border: none;
+        padding: 16px;
+        border-radius: 14px;
+        font-weight: 900;
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        cursor: pointer;
+        transition: 0.3s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .wp-submit-btn:hover {
+        background: white;
+        transform: translateY(-2px);
+        box-shadow: 0 10px 20px rgba(0, 242, 255, 0.2);
+    }
+</style>
+
+<script>
+    function showWPPopup() {
+        document.getElementById('wp-identity-popup').style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeWPPopup() {
+        document.getElementById('wp-identity-popup').style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
+
+    function launchWPSignup() {
+        const targetUrl = "https://debeatzgh1.github.io/Blogger-sign-up-button-/";
+        
+        // Closes the popup and opens the URL in your master overlay
+        closeWPPopup();
+        
+        if (typeof openLink === "function") {
+            openLink(targetUrl);
+        } else if (typeof openFrame === "function") {
+            openFrame(targetUrl);
+        } else {
+            window.open(targetUrl, '_blank');
+        }
+    }
+
+    // Auto-trigger popup after 5 seconds for demonstration
+    window.onload = () => {
+        setTimeout(showWPPopup, 5000);
+    };
+</script>
+
+
 <html lang="en-GB">
 <head>
     <meta charset="UTF-8" />
