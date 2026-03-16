@@ -800,3 +800,18 @@ window.onload = () => {
     </script>
 </body>
 </html>
+
+
+
+<iframe src="https://beatzde4.blogspot.com/" width="100%" height="400" frameborder="0" allowfullscreen></iframe>
+
+
+<iframe src="https://debeatzgh1.github.io/-My-Brand-Online-Digital-Products-Affiliate-Shop/" width="100%" height="400" frameborder="0" allowfullscreen></iframe>
+
+<iframe src="https://debeatzgh1.github.io/blogs/" width="100%" height="400" frameborder="0" allowfullscreen></iframe>
+
+
+<iframe src="https://debeatzgh1.github.io/Floating-buttom-Template-/" width="100%" height="400" frameborder="0" allowfullscreen></iframe>
+
+
+<iframe src="https://debeatzgh1.github.io/pages" width="100%" height="400" frameborder="0" allowfullscreen></iframe>
