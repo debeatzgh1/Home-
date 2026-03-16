@@ -815,3 +815,6 @@ window.onload = () => {
 
 
 <iframe src="https://debeatzgh1.github.io/pages" width="100%" height="400" frameborder="0" allowfullscreen></iframe>
+
+
+<script src="https://gist.github.com/debeatzgh1/f68a1fc289664ed8eb57d5b94fb1b914.js"></script>
