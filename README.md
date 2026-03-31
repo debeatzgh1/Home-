@@ -147,7 +147,7 @@
     </div>
   </div>
   <div class='dd-right'>
-    <a class='dd-join-btn' href='https://debeatzgh1.github.io/Home-/' target='_blank'>
+    <a class='dd-join-btn' href='https://debeatzgh1.github.io/sales/' target='_blank'>
       <i class='fas fa-users'></i> <span class='dd-btn-text'>Contact support</span>
     </a>
   </div>
