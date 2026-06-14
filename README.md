@@ -2,7 +2,7 @@
 (function(){
 
 /* ================= CONFIG ================= */
-const DBZ_HOME = "https://9d5e151d596541b2bc6a8b0df27c1bc1.elf.site";
+const DBZ_HOME = "https://debeatzgh1.github.io/firebase-front-end-components/";
 const BTN_SIZE = 36; // Shrunk down from 52px to a mini size
 const BTN_COLOR = "#0f2a44";
 
