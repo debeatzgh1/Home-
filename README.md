@@ -11,7 +11,7 @@ const css = `
 #dbz-btn{
   position:fixed;
   right:16px;
-  top:75%;
+  top:40%;
   transform:translateY(-50%);
   width:${BTN_SIZE}px;
   height:${BTN_SIZE}px;
