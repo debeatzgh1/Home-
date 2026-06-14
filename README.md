@@ -48,8 +48,8 @@ const css = `
   right:10px;
   bottom:20px;
 
-  width:400px;
-  height:40vh;
+  width:450px;
+  height:60vh;
 
   background:#fff;
   border-radius:16px;
