@@ -248,7 +248,7 @@
     <span class="close" onclick="closeModal('aiModal')">&times;</span>
     <h2>AI Articles</h2>
     <ul>
-      <li><a href="https://beatzde4.blogspot.com/search/label/AI" target="_blank">AI Articles on Beatzde4</a></li>
+      <li><a href="https://debeatzgh1.github.io/Digital-Creator-s-Essential-Guides-Tools/" target="_blank">AI Articles on Beatzde4</a></li>
       <li><a href="https://appdategh1.blogspot.com/search/label/AI" target="_blank">AppdateGH AI Section</a></li>
     </ul>
     <p>Stay updated with the latest in AI, automation, and tech trends!</p>
